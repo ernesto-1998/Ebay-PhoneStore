@@ -174,7 +174,7 @@
                   </a>
                 </div>
                 <div class="delete-button">
-                  <a @click="eliminarImagen()">
+                  <a @click="vorrarImagen()">
                     <div class="icon-cont icon-border">
                       <ion-icon name="add-outline"></ion-icon>
                     </div>
@@ -220,7 +220,9 @@
               <div class="img-upload-container">
                 <div class="img-content">
                   <img
-                    :src="imagenes[contador] ? imagenes[contador].url : rutaImg"
+                    :src="
+                      imagenes2[contador] ? imagenes2[contador].url : rutaImg
+                    "
                     alt=""
                   />
                 </div>
@@ -264,15 +266,18 @@ import { db, st } from "../firebase";
 import {
   uploadBytes,
   getDownloadURL,
+  getMetadata,
   ref as reference,
   list,
   deleteObject,
 } from "firebase/storage";
 
 // const id_usuario = router.currentRoute.value.params.id;
-const rutaImg = ref(null);
+const rutaImg = ref("src/assets/blank-profile-picture-973460.svg");
+let visible = ref(true);
 let imagenes = ref([]);
 let imagenes2 = ref([]);
+let metaDatosI = ref([]);
 let borrarArray = [];
 let contador = ref(0);
 let conteo = ref(1);
@@ -299,11 +304,11 @@ let anuncio = ref({
 let img = ref(null);
 
 onMounted(() => {
-  getDownloadURL(
-    reference(st, "anuncios/noImg/" + "blank-profile-picture-973460.svg")
-  ).then((url) => {
-    rutaImg.value = url;
-  });
+  //   getDownloadURL(
+  //     reference(st, "anuncios/noImg/" + "blank-profile-picture-973460.svg")
+  //   ).then((url) => {
+  //     rutaImg.value = url;
+  //   });
 });
 
 watch(conteo, () => {
@@ -373,37 +378,62 @@ const guardarImagenes = async (id) => {
 // Este método sube la imagen a una carpeta temporal (Aun no la carpeta oficial)
 
 const handleFileUpload = async () => {
-  if (imagenes.value.length < 4) {
-    if (borrarArray.length !== 0) {
-      conteo.value = borrarArray[0];
-    }
-    imagenes2.value.push(img.value.files[0]);
+  //   if (imagenes.value.length < 4) {
+  //     if (borrarArray.length !== 0) {
+  //       conteo.value = borrarArray[0];
+  //     }
+  //     imagenes2.value.push(img.value.files[0]);
+  //     await uploadBytes(
+  //       reference(st, "anuncios/temporal/" + conteo.value),
+  //       img.value.files[0]
+  //     ).then((snapshot) => {
+  //       traerImagenTemp();
+  //       img.value.value = "";
+  //     });
+  //   } else {
+  //     alert("Solo puedes subir 4 imagenes por anuncio");
+  //   }
+  imagenes.value = [];
+  imagenes.value.push(img.value.files[0]);
+};
+
+const cargarImagen = async () => {
+  if (imagenes.value.length === 1) {
     await uploadBytes(
-      reference(st, "anuncios/temporal/" + conteo.value),
+      reference(st, "imagenes/temporal" + conteo.value),
       img.value.files[0]
     ).then((snapshot) => {
       traerImagenTemp();
       img.value.value = "";
     });
   } else {
-    alert("Solo puedes subir 4 imagenes por anuncio");
+    alert("Debe seleccionar al menos una imagen");
   }
 };
 
 // Este método trae la imagen en tiempo real en el componente upload (para que le usuario pueda verla)
 
 const traerImagenTemp = async () => {
-  await getDownloadURL(reference(st, "anuncios/temporal/" + conteo.value)).then(
+  await getDownloadURL(reference(st, "imagenes/temporal" + conteo.value)).then(
     (url) => {
-      imagenes.value.push({ url: url, numero: conteo.value });
+      imagenes2.value.push({ url: url, numero: conteo.value });
       control.value = true;
-      conteo.value += 1;
-      contador.value = imagenes.value.length - 1;
       if (borrarArray.length !== 0) {
         borrarArray.shift();
       }
     }
   );
+  const metaDatos = await getMetadata(
+    reference(st, "imagenes/temporal" + conteo.value)
+  );
+
+  metaDatosI.value.push({
+    size: (metaDatos.size * 0.001).toFixed(0),
+    type: metaDatos.contentType,
+  });
+  conteo.value += 1;
+  contador.value = imagenes.value.length - 1;
+  //   this.contador3 += 1;
 };
 
 // Método para cambiar imagen en el menú
@@ -415,7 +445,7 @@ const cambiarImagen = (index) => {
 // Método para borrar la imagen del menú
 
 const borrarImagen = (numero, index) => {
-  const desertRef = reference(st, "anuncios/temporal/" + numero);
+  const desertRef = reference(st, "imagenes/temporal" + numero);
   borrarArray.push(numero);
   deleteObject(desertRef)
     .then(() => {
