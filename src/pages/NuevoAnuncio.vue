@@ -32,10 +32,28 @@
 
             <div class="item-box">
               <div class="item-title">
-                <span>Modelo del Telefono:</span>
+                <span>Marca:</span>
+              </div>
+              <div class="item-input">
+                <input v-model="anuncio.telefono.marca" type="text" />
+              </div>
+            </div>
+
+            <div class="item-box">
+              <div class="item-title">
+                <span>Modelo:</span>
               </div>
               <div class="item-input">
                 <input v-model="anuncio.telefono.modelo" type="text" />
+              </div>
+            </div>
+
+            <div class="item-box">
+              <div class="item-title">
+                <span>Pantalla:</span>
+              </div>
+              <div class="item-input">
+                <input v-model="anuncio.telefono.pantalla" type="number" />
               </div>
             </div>
 
@@ -53,21 +71,25 @@
                   <option value="android">Android</option>
                   <option value="ios">IOS</option>
                   <option value="windows">Windows</option>
-                  <option value="harmony">Harmony OS</option>
                 </select>
               </div>
             </div>
 
             <div class="item-box">
               <div class="item-title">
-                <span>Precio</span>
+                <span>ROM:</span>
               </div>
-              <div class="item-input-number">
-                <input
-                  v-model="anuncio.telefono.precio"
-                  class="input-number"
-                  type="number"
-                />
+              <div class="item-input">
+                <input v-model="anuncio.telefono.rom" type="number" />
+              </div>
+            </div>
+
+            <div class="item-box">
+              <div class="item-title">
+                <span>RAM:</span>
+              </div>
+              <div class="item-input">
+                <input v-model="anuncio.telefono.ram" type="number" />
               </div>
             </div>
           </div>
@@ -116,6 +138,18 @@
                   cols="30"
                   rows="5"
                 ></textarea>
+              </div>
+            </div>
+            <div class="item-box">
+              <div class="item-title">
+                <span>Precio</span>
+              </div>
+              <div class="item-input-number">
+                <input
+                  v-model="anuncio.telefono.precio"
+                  class="input-number"
+                  type="number"
+                />
               </div>
             </div>
           </div>
@@ -171,7 +205,7 @@
         </div>
       </div>
     </div>
-    <div class="third-line">
+    <!-- <div class="third-line">
       <div class="buttons-container">
         <div class="buttons-content">
           <a class="btn btnGeneral" @click="guardarAnuncio">Enviar</a>
@@ -180,7 +214,7 @@
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -247,13 +281,16 @@ watch(conteo, () => {
 const guardarAnuncio = async () => {
   if (
     anuncio.value.titulo !== "" &&
-    anuncio.value.vendedor !== "" &&
-    anuncio.value.numeroTelefono &&
+    anuncio.value.nombre !== "" &&
+    anuncio.value.telefonoContacto &&
     anuncio.value.descripcion !== "" &&
+    anuncio.value.precio !== null &&
     anuncio.value.telefono.estado !== "" &&
-    anuncio.value.telefono.modelo !== "" &&
+    anuncio.value.telefono.marca !== "" &&
+    anuncio.value.telefono.pantalla !== null &&
     anuncio.value.telefono.sistema !== "" &&
-    anuncio.value.telefono.precio !== ""
+    anuncio.value.telefono.rom !== null &&
+    anuncio.value.telefono.ram !== null
   ) {
     if (imagenes.value.length > 0) {
       const docSnap = await addDoc(collection(db, "anuncios"), {
