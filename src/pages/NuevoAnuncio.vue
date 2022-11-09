@@ -165,43 +165,81 @@
         <div class="third-cuadrant">
           <div class="img-container">
             <div class="img-box">
-              <div class="img-content">
-                <img
-                  :src="imagenes[contador] ? imagenes[contador].url : rutaImg"
-                  alt=""
-                />
+              <div class="img-buttons">
+                <div class="upload-button">
+                  <a @click="cargarImagen()">
+                    <div class="icon-cont icon-border">
+                      <ion-icon name="add-outline"></ion-icon>
+                    </div>
+                  </a>
+                </div>
+                <div class="delete-button">
+                  <a @click="eliminarImagen()">
+                    <div class="icon-cont icon-border">
+                      <ion-icon name="add-outline"></ion-icon>
+                    </div>
+                  </a>
+                </div>
               </div>
-              <div class="upload-content">
-                <div class="upload-input">
-                  <input
-                    class="btn btnGeneral"
-                    ref="img"
-                    v-on:change="handleFileUpload()"
-                    type="file"
-                    id="file"
-                    name="file"
-                    accept="image/png, image/jpeg"
+
+              <div class="img-table">
+                <div class="table-container">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">N</th>
+                        <th scope="col">Tamaño</th>
+                        <th scope="col">Tipo</th>
+                      </tr>
+                    </thead>
+                    <tbody v-if="visible === true">
+                      <tr v-for="(value, index) in metaDatosI" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ value.size }} kb</td>
+                        <td>
+                          {{
+                            value.type === "image/jpeg"
+                              ? ".jpg"
+                              : value.type === "image/png"
+                              ? ".png"
+                              : ".gif"
+                          }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <b-spinner
+                    v-if="visible === false"
+                    style="width: 5rem; height: 5rem"
+                    class="ms-md-10 mt-md-3"
+                    variant="primary"
+                  ></b-spinner>
+                </div>
+              </div>
+
+              <div class="img-upload-container">
+                <div class="img-content">
+                  <img
+                    :src="imagenes[contador] ? imagenes[contador].url : rutaImg"
+                    alt=""
                   />
+                </div>
+                <div class="upload-content">
+                  <div class="upload-input">
+                    <input
+                      class="btn btnGeneral"
+                      ref="img"
+                      v-on:change="handleFileUpload()"
+                      type="file"
+                      id="file"
+                      name="file"
+                      accept="image/png, image/jpeg"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <ul class="list-container">
-            <li class="list-item" v-for="(img, index) in imagenes" :key="index">
-              <div class="list-item-content">
-                <div class="list-item-number" @click="cambiarImagen(index)">
-                  <span>{{ index + 1 }}</span>
-                </div>
-                <div
-                  class="list-item-icon"
-                  @click="borrarImagen(img.numero, index)"
-                >
-                  <ion-icon name="trash-outline"></ion-icon>
-                </div>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -520,8 +558,8 @@ textarea {
 }
 
 .third-cuadrant {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 .title-content {
@@ -536,14 +574,35 @@ textarea {
 
 .img-container {
   /* background: var(--main-color); */
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   padding: 15px 0;
 }
 
+.img-box {
+  display: flex;
+  justify-content: space-around;
+}
+
+.img-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.upload-button,
+.delete-button {
+  font-size: 3rem;
+}
+
+.upload-button:hover,
+.delete-button:hover {
+  cursor: pointer;
+}
+
 .img-content {
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
   margin: 0 auto;
   overflow: hidden;
   margin-bottom: 15px;
@@ -559,12 +618,20 @@ textarea {
   margin-bottom: 15px;
 }
 
-.upload-button {
+.icon-border {
   display: flex;
+  align-items: center;
   justify-content: center;
+  border-radius: 100px;
+  border: 1px solid #fff;
 }
 
-.list-container {
+/* .upload-button {
+  display: flex;
+  justify-content: center;
+} */
+
+/* .list-container {
   padding: 15px 0;
   margin-left: 15px;
 }
@@ -616,7 +683,7 @@ textarea {
 
 .list-item-icon ion-icon {
   font-size: 1.5rem;
-}
+} */
 
 /* Third Line */
 
