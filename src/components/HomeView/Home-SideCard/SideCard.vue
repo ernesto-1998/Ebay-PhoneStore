@@ -16,16 +16,20 @@
             <span>Samsung</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="iphone" name="iphone" id="" />
-            <span>Iphone</span>
-          </div>
-          <div class="card-item">
             <input type="checkbox" v-model="marcas" value="huawei" name="huawei" id="" />
             <span>Huawei</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="motorola" name="motorola" id="" />
-            <span>Motorola</span>
+            <input type="checkbox" v-model="marcas" value="nokia" name="nokia" id="" />
+            <span>Nokia</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="marcas" value="iphone" name="iphone" id="" />
+            <span>Iphone</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="marcas" value="xiaomi" name="xiaomi" id="" />
+            <span>Xiaomi</span>
           </div>
         </div>
       </div>
@@ -39,37 +43,29 @@
             <input type="checkbox" v-model="sistemas" value="android" name="android" id="" /> <span>Android</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="ios" name="ios" id="" /> <span>IOS</span>
-          </div>
-          <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="harmony" name="harmony" id="" />
-            <span>Harmony OS</span>
-          </div>
-          <div class="card-item">
             <input type="checkbox" v-model="sistemas" value="windows" name="windows" id="" />
-            <span>Windows Phone</span>
+            <span>Windows</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="sistemas" value="ios" name="ios" id="" /> <span>Ios</span>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-title">
-          <span>Sistema Operativo</span>
+          <span>Pantalla</span>
         </div>
         <hr />
         <div class="card-body">
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="android" name="android" id="" /> <span>Android</span>
+            <input type="checkbox" v-model="sistemas" value="6.0" name="6.0" id="" /> <span>6.0</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="ios" name="ios" id="" /> <span>IOS</span>
+            <input type="checkbox" v-model="sistemas" value="5.5" name="5.5" id="" /> <span>5.5</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="harmony" name="harmony" id="" />
-            <span>Harmony OS</span>
-          </div>
-          <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="windows" name="windows" id="" />
-            <span>Windows Phone</span>
+            <input type="checkbox" v-model="sistemas" value="5.0" name="5.0" id="" />
+            <span>5</span>
           </div>
         </div>
       </div>

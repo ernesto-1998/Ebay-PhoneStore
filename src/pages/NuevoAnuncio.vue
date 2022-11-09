@@ -178,7 +178,7 @@ import {
   deleteObject
 } from "firebase/storage";
 
-const id_usuario = router.currentRoute.value.params.id;
+// const id_usuario = router.currentRoute.value.params.id;
 const rutaImg = ref(null);
 let imagenes = ref([]);
 let imagenes2 = ref([]);

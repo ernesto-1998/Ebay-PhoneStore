@@ -3,7 +3,7 @@
     <nav class="container navigation">
       <div class="left-container">
         <router-link :to="{name: 'home'}">
-          <ion-icon name="phone-portrait-outline"></ion-icon>
+          <ion-icon name="megaphone-outline"></ion-icon>
           <span>Tienda Cellphone</span>
         </router-link>
       </div>
@@ -26,16 +26,20 @@
         </div>
       </div>
       <div class="buttons-container">
-        <router-link :to="{name: 'home'}" class="btn btnGeneral">Inicio</router-link>
+        <router-link :to="{name: 'home'}" class="btn btnGeneral m-l">Inicio</router-link>
+        <router-link :to="{name: 'home'}" class="btn btnGeneral m-l">Estadisticas</router-link>
       </div>
-      <div class="toggle-button">
-        <!-- <ion-icon name="menu-outline" @click="isActive = !isActive"></ion-icon> -->
-        <img v-if="!user_photo.photo" src="../assets/blank-profile-picture-973460.svg" @click="isActive = !isActive" alt="">
-        <img v-if="user_photo.photo" :src="user_photo.photo" @click="isActive = !isActive" alt="">
+      <div class="interaction-container">
+        <router-link class="icon-interactive" :to="{ name: 'nuevo'}"
+          ><div class="icon-cont icon-border"><ion-icon name="add-outline"></ion-icon></div></router-link
+        >     
+        <router-link class="icon-interactive" :to="{ name: 'nuevo'}"
+          ><ion-icon name="cart-outline"></ion-icon></router-link
+        >     
       </div>
-      <div class="side-menu-container" :class="{toggle_back: isActive}">
+      <!-- <div class="side-menu-container" :class="{toggle_back: isActive}">
         <SideNav @change-state="change"/>
-      </div>
+      </div> -->
       
     </nav>
   </header>
@@ -92,6 +96,31 @@ const searchEmit = () => {
 </script>
 
 <style scoped>
+
+.m-l {
+  margin-left: 1rem;
+}
+
+.icon-interactive {
+  margin-left: 1rem;
+}
+
+.icon-interactive ion-icon {
+  font-size: 2.2rem;
+}
+
+.interaction-container {
+  display: flex;
+  align-items: center;
+}
+
+.icon-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  border: 1px solid #fff;
+}
 
 header {
   width: 100%;
@@ -155,6 +184,7 @@ header {
 
 .left-container ion-icon {
   margin-right: 10px;
+  font-size: 2.2rem;
 }
 
 .input-container {
