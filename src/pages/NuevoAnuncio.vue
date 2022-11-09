@@ -110,7 +110,7 @@
                 <span>Nombre del Vendedor:</span>
               </div>
               <div class="item-input">
-                <input v-model="anuncio.vendedor" type="text" />
+                <input v-model="anuncio.nombre" type="text" />
               </div>
             </div>
 
@@ -120,7 +120,7 @@
               </div>
               <div class="item-input-number">
                 <input
-                  v-model="anuncio.numeroTelefono"
+                  v-model="anuncio.telefonoContacto"
                   class="input-number"
                   type="number"
                 />
@@ -140,17 +140,27 @@
                 ></textarea>
               </div>
             </div>
-            <div class="item-box">
-              <div class="item-title">
-                <span>Precio</span>
+            <div class="item-box-precio">
+              <div class="item-precio">
+                <div class="item-title">
+                  <span>Precio</span>
+                </div>
+                <div class="item-input-number">
+                  <input
+                    v-model="anuncio.precio"
+                    class="input-number"
+                    type="number"
+                  />
+                </div>
               </div>
-              <div class="item-input-number">
-                <input
-                  v-model="anuncio.telefono.precio"
-                  class="input-number"
-                  type="number"
-                />
-              </div>
+            </div>
+          </div>
+          <div class="buttons-container">
+            <div class="buttons-content">
+              <a class="btn btnGeneral" @click="guardarAnuncio">Enviar</a>
+              <router-link :to="{ name: 'home' }" class="btn btnGeneral2"
+                >Cancelar</router-link
+              >
             </div>
           </div>
         </div>
@@ -174,9 +184,9 @@
                   </a>
                 </div>
                 <div class="delete-button">
-                  <a @click="vorrarImagen()">
+                  <a @click="borrarImagen(borrarKeys.numero, borrarKeys.index)">
                     <div class="icon-cont icon-border">
-                      <ion-icon name="add-outline"></ion-icon>
+                      <ion-icon name="remove-outline"></ion-icon>
                     </div>
                   </a>
                 </div>
@@ -185,28 +195,33 @@
               <div class="img-table">
                 <div class="table-container">
                   <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">N</th>
-                        <th scope="col">Tamaño</th>
-                        <th scope="col">Tipo</th>
-                      </tr>
-                    </thead>
-                    <tbody v-if="visible === true">
-                      <tr v-for="(value, index) in metaDatosI" :key="index">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ value.size }} kb</td>
-                        <td>
-                          {{
-                            value.type === "image/jpeg"
-                              ? ".jpg"
-                              : value.type === "image/png"
-                              ? ".png"
-                              : ".gif"
-                          }}
-                        </td>
-                      </tr>
-                    </tbody>
+                    <!-- <thead> -->
+                    <tr class="table-row-head table-row">
+                      <th class="table-ceil">N</th>
+                      <th class="table-ceil">Tamaño</th>
+                      <th class="table-ceil">Tipo</th>
+                    </tr>
+                    <!-- </thead> -->
+                    <!-- <tbody v-if="visible === true"> -->
+                    <tr
+                      @click="cambiarImagen(value.numero, index)"
+                      v-for="(value, index) in imagenes2"
+                      :key="index"
+                      class="table-row-body table-row"
+                    >
+                      <td class="table-ceil">{{ index + 1 }}</td>
+                      <td class="table-ceil">{{ value.size }} kb</td>
+                      <td class="table-ceil">
+                        {{
+                          value.type === "image/jpeg"
+                            ? ".jpg"
+                            : value.type === "image/png"
+                            ? ".png"
+                            : ".gif"
+                        }}
+                      </td>
+                    </tr>
+                    <!-- </tbody> -->
                   </table>
                   <b-spinner
                     v-if="visible === false"
@@ -275,6 +290,10 @@ import {
 // const id_usuario = router.currentRoute.value.params.id;
 const rutaImg = ref("src/assets/blank-profile-picture-973460.svg");
 let visible = ref(true);
+let borrarKeys = ref({
+  numero: null,
+  index: null,
+});
 let imagenes = ref([]);
 let imagenes2 = ref([]);
 let metaDatosI = ref([]);
@@ -303,13 +322,7 @@ let anuncio = ref({
 });
 let img = ref(null);
 
-onMounted(() => {
-  //   getDownloadURL(
-  //     reference(st, "anuncios/noImg/" + "blank-profile-picture-973460.svg")
-  //   ).then((url) => {
-  //     rutaImg.value = url;
-  //   });
-});
+onMounted(() => {});
 
 watch(conteo, () => {
   if (conteo.value > 4) {
@@ -322,31 +335,24 @@ watch(conteo, () => {
 // Este método guarda el anuncio
 
 const guardarAnuncio = async () => {
-  if (
-    anuncio.value.titulo !== "" &&
-    anuncio.value.nombre !== "" &&
-    anuncio.value.telefonoContacto &&
-    anuncio.value.descripcion !== "" &&
-    anuncio.value.precio !== null &&
-    anuncio.value.telefono.estado !== "" &&
-    anuncio.value.telefono.marca !== "" &&
-    anuncio.value.telefono.pantalla !== null &&
-    anuncio.value.telefono.sistema !== "" &&
-    anuncio.value.telefono.rom !== null &&
-    anuncio.value.telefono.ram !== null
-  ) {
+  if (validarFormulario()) {
     if (imagenes.value.length > 0) {
       const docSnap = await addDoc(collection(db, "anuncios"), {
-        id_usuario: id_usuario,
+        // id_usuario: id_usuario,
         titulo: anuncio.value.titulo.trim(),
-        vendedor: anuncio.value.vendedor.trim(),
-        numeroTelefono: anuncio.value.numeroTelefono,
+        vendedor: anuncio.value.nombre.trim(),
+        numeroTelefono: anuncio.value.telefonoContacto,
+        fecha: new Date(),
+        precio: anuncio.value.precio,
         descripcion: anuncio.value.descripcion,
         telefono: {
           estado: anuncio.value.telefono.estado,
+          marca: anuncio.value.telefono.marca,
           modelo: anuncio.value.telefono.modelo,
+          pantalla: anuncio.value.telefono.pantalla,
           sistema: anuncio.value.telefono.sistema,
-          precio: anuncio.value.telefono.precio,
+          rom: anuncio.value.telefono.rom,
+          ram: anuncio.value.telefono.ram,
         },
       });
       id_anuncio.value = docSnap.id;
@@ -359,11 +365,31 @@ const guardarAnuncio = async () => {
   }
 };
 
+const validarFormulario = () => {
+  if (
+    anuncio.value.titulo !== "" &&
+    anuncio.value.nombre !== "" &&
+    anuncio.value.telefonoContacto !== null &&
+    anuncio.value.descripcion !== "" &&
+    anuncio.value.precio !== null &&
+    anuncio.value.telefono.estado !== "" &&
+    anuncio.value.telefono.marca !== "" &&
+    anuncio.value.telefono.pantalla !== null &&
+    anuncio.value.telefono.sistema !== "" &&
+    anuncio.value.telefono.rom !== null &&
+    anuncio.value.telefono.ram !== null
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 // Este método guarda las imagenes del componente imagen en la carpeta con el id del anuncio
 
 const guardarImagenes = async (id) => {
   let numero = 1;
-  for (let image of imagenes2.value) {
+  for (let image of imagenes.value) {
     await uploadBytes(
       reference(st, "anuncios/" + id + "/" + numero),
       image
@@ -377,35 +403,22 @@ const guardarImagenes = async (id) => {
 
 // Este método sube la imagen a una carpeta temporal (Aun no la carpeta oficial)
 
-const handleFileUpload = async () => {
-  //   if (imagenes.value.length < 4) {
-  //     if (borrarArray.length !== 0) {
-  //       conteo.value = borrarArray[0];
-  //     }
-  //     imagenes2.value.push(img.value.files[0]);
-  //     await uploadBytes(
-  //       reference(st, "anuncios/temporal/" + conteo.value),
-  //       img.value.files[0]
-  //     ).then((snapshot) => {
-  //       traerImagenTemp();
-  //       img.value.value = "";
-  //     });
-  //   } else {
-  //     alert("Solo puedes subir 4 imagenes por anuncio");
-  //   }
-  imagenes.value = [];
-  imagenes.value.push(img.value.files[0]);
-};
+const handleFileUpload = async () => {};
 
 const cargarImagen = async () => {
-  if (imagenes.value.length === 1) {
-    await uploadBytes(
-      reference(st, "imagenes/temporal" + conteo.value),
-      img.value.files[0]
-    ).then((snapshot) => {
-      traerImagenTemp();
-      img.value.value = "";
-    });
+  if (img.value.files[0]) {
+    if (imagenes2.value.length < 4) {
+      imagenes.value.push(img.value.files[0]);
+      await uploadBytes(
+        reference(st, "imagenes/temporal" + conteo.value),
+        img.value.files[0]
+      ).then((snapshot) => {
+        traerImagenTemp();
+        img.value.value = "";
+      });
+    } else {
+      alert("Solamente puede subir 4 imagenes como máximo");
+    }
   } else {
     alert("Debe seleccionar al menos una imagen");
   }
@@ -415,47 +428,60 @@ const cargarImagen = async () => {
 
 const traerImagenTemp = async () => {
   await getDownloadURL(reference(st, "imagenes/temporal" + conteo.value)).then(
-    (url) => {
-      imagenes2.value.push({ url: url, numero: conteo.value });
+    async (url) => {
+      const metaDatos = await getMetadata(
+        reference(st, "imagenes/temporal" + conteo.value)
+      );
+      imagenes2.value.push({
+        url: url,
+        numero: conteo.value,
+        size: (metaDatos.size * 0.001).toFixed(0),
+        type: metaDatos.contentType,
+      });
       control.value = true;
+      conteo.value += 1;
+      contador.value = imagenes.value.length - 1;
       if (borrarArray.length !== 0) {
         borrarArray.shift();
       }
     }
   );
-  const metaDatos = await getMetadata(
-    reference(st, "imagenes/temporal" + conteo.value)
-  );
 
-  metaDatosI.value.push({
-    size: (metaDatos.size * 0.001).toFixed(0),
-    type: metaDatos.contentType,
-  });
-  conteo.value += 1;
-  contador.value = imagenes.value.length - 1;
+  //   metaDatosI.value.push({
+  //     size: (metaDatos.size * 0.001).toFixed(0),
+  //     type: metaDatos.contentType,
+  //   });
+  //   conteo.value += 1;
+  //   contador.value = imagenes.value.length - 1;
   //   this.contador3 += 1;
 };
 
 // Método para cambiar imagen en el menú
 
-const cambiarImagen = (index) => {
+const cambiarImagen = (numero, index) => {
+  borrarKeys.value.numero = numero;
+  borrarKeys.value.index = index;
   contador.value = index;
 };
 
 // Método para borrar la imagen del menú
 
 const borrarImagen = (numero, index) => {
-  const desertRef = reference(st, "imagenes/temporal" + numero);
-  borrarArray.push(numero);
-  deleteObject(desertRef)
-    .then(() => {
-      imagenes2.value.splice(index, 1);
-      imagenes.value.splice(index, 1);
-      console.log("Imagen borrada", numero);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (numero !== null && index !== null) {
+    const desertRef = reference(st, "imagenes/temporal" + numero);
+    borrarArray.push(numero);
+    deleteObject(desertRef)
+      .then(() => {
+        imagenes2.value.splice(index, 1);
+        imagenes.value.splice(index, 1);
+        console.log("Imagen borrada", numero);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    alert("Debes seleccionar una imagen para eliminarla");
+  }
 };
 </script>
 
@@ -507,7 +533,7 @@ textarea {
 }
 
 .item-input-number input {
-  width: 30%;
+  /* width: 30%; */
   outline: none;
   padding: 2px 5px;
   background: none;
@@ -519,7 +545,7 @@ textarea {
 
 .item-input-number input:focus {
   background: var(--second-color);
-  width: 35%;
+  /* width: 35%; */
 }
 
 .item-input input:focus {
@@ -580,6 +606,21 @@ textarea {
   margin-top: 30px;
 }
 
+.item-box-precio {
+  width: 100%;
+}
+
+.item-box-precio .item-precio {
+  border: 0.5rem solid var(--text-color);
+  padding: 1rem;
+  margin: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Tercer Contenedor */
 
 .second-line {
@@ -595,6 +636,7 @@ textarea {
 .title-content {
   display: flex;
   justify-content: center;
+  margin: 1rem 0;
 }
 
 .title-content span {
@@ -617,17 +659,27 @@ textarea {
 .img-buttons {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .upload-button,
 .delete-button {
-  font-size: 3rem;
+  font-size: 5rem;
+  margin-bottom: 2rem;
 }
 
 .upload-button:hover,
 .delete-button:hover {
   cursor: pointer;
+}
+
+.table-container {
+  color: var(--text-color);
+}
+
+.table-ceil {
+  padding: 0.2rem 1.5rem;
+  font-size: 1rem;
 }
 
 .img-content {
@@ -727,6 +779,7 @@ textarea {
 
 .buttons-container {
   width: 100%;
+  margin: 2rem 1rem;
 }
 
 .buttons-content {

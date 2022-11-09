@@ -2,7 +2,8 @@
   <div class="sidecard-container">
     <div class="card-container">
       <div class="sidecard-switch">
-        <span>Nuevo</span> <input @click="asignarEstado" type="checkbox" value="true">
+        <span>Nuevo</span>
+        <input @click="asignarEstado" type="checkbox" value="true" />
       </div>
       <hr />
       <div class="card">
@@ -12,23 +13,53 @@
         <hr />
         <div class="card-body">
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="samsung" name="samsung" id="" />
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="samsung"
+              name="samsung"
+              id=""
+            />
             <span>Samsung</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="huawei" name="huawei" id="" />
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="huawei"
+              name="huawei"
+              id=""
+            />
             <span>Huawei</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="nokia" name="nokia" id="" />
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="nokia"
+              name="nokia"
+              id=""
+            />
             <span>Nokia</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="iphone" name="iphone" id="" />
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="iphone"
+              name="iphone"
+              id=""
+            />
             <span>Iphone</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="marcas" value="xiaomi" name="xiaomi" id="" />
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="xiaomi"
+              name="xiaomi"
+              id=""
+            />
             <span>Xiaomi</span>
           </div>
         </div>
@@ -40,14 +71,34 @@
         <hr />
         <div class="card-body">
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="android" name="android" id="" /> <span>Android</span>
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="android"
+              name="android"
+              id=""
+            />
+            <span>Android</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="windows" name="windows" id="" />
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="windows"
+              name="windows"
+              id=""
+            />
             <span>Windows</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="ios" name="ios" id="" /> <span>Ios</span>
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="ios"
+              name="ios"
+              id=""
+            />
+            <span>Ios</span>
           </div>
         </div>
       </div>
@@ -58,13 +109,33 @@
         <hr />
         <div class="card-body">
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="6.0" name="6.0" id="" /> <span>6.0</span>
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="6.0"
+              name="6.0"
+              id=""
+            />
+            <span>6.0</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="5.5" name="5.5" id="" /> <span>5.5</span>
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="5.5"
+              name="5.5"
+              id=""
+            />
+            <span>5.5</span>
           </div>
           <div class="card-item">
-            <input type="checkbox" v-model="sistemas" value="5.0" name="5.0" id="" />
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="5.0"
+              name="5.0"
+              id=""
+            />
             <span>5</span>
           </div>
         </div>
@@ -74,9 +145,8 @@
 </template>
 
 <script setup>
-
-import { ref, onUpdated } from 'vue';
-import { useInputStore } from '../../../stores/input';
+import { ref, onUpdated } from "vue";
+import { useInputStore } from "../../../stores/input";
 
 let marcas = ref([]);
 let sistemas = ref([]);
@@ -84,16 +154,16 @@ let pantallas = ref([]);
 let estado = false;
 const input = useInputStore();
 
-onUpdated(()=>{
+onUpdated(() => {
   input.asignarMarcas(marcas.value);
   input.asignarSistemas(sistemas.value);
-})
+  input.asignarPantallas(pantallas.value);
+});
 
 const asignarEstado = () => {
   estado = !estado;
   input.asignarEstado(estado);
-}
-
+};
 </script>
 
 <style scoped>
@@ -120,7 +190,6 @@ const asignarEstado = () => {
 
 .sidecard-switch input {
   margin-left: 10px;
-  
 }
 
 .card {
@@ -140,7 +209,7 @@ const asignarEstado = () => {
 }
 
 .card:last-child .card-body {
-      margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .card-item {

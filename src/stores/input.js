@@ -28,7 +28,7 @@ export const useInputStore = defineStore({
         asignarSistemas(data){
             this.sistemas = data;
         },
-        asignarSistemas(data){
+        asignarPantallas(data){
             this.pantallas = data;
         },
         asignarEstado(data){

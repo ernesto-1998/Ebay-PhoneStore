@@ -1,45 +1,47 @@
 <template>
-<div>
-
-  <div v-if="load" class="container main-container">
-    <div class="left-grid-container">
-      <SideCard />
-    </div>
-    <div class="right-grid-container">
-      <div class="price-order-container">
-        <Price />
-        <Order />
+  <div>
+    <div v-if="load" class="container main-container">
+      <div class="left-grid-container">
+        <SideCard />
       </div>
-      <div class="anuncios-container">
+      <div class="right-grid-container">
+        <div class="price-order-container">
+          <Price />
+          <Order />
+        </div>
+        <div class="anuncios-container">
           <div class="anuncios-content">
             <div
-            class="anuncios-cards"
-            v-for="(anuncio, index) in anunciosFiltrados"
-            :key="index"
+              class="anuncios-cards"
+              v-for="(anuncio, index) in anunciosFiltrados"
+              :key="index"
             >
-            <router-link
+              <router-link
                 :to="{ name: 'anuncio', params: { id: anuncio.id_anuncio } }"
                 ><Card :object="anuncio"
-            /></router-link>
-            </div>              
+              /></router-link>
+            </div>
           </div>
           <div class="anuncios-paginator">
-              <ul class="paginator-container">
-                <li class="paginator-content" @click="cambiarPagina(index)" v-for="(number, index) in anunciosFiltradosPaginados" :key="index">
-                  <span>{{ numero = index + 1 }}</span>
-                </li>
-              </ul>
-              <div class="perPage-container">
-
-              </div>
+            <ul class="paginator-container">
+              <li
+                class="paginator-content"
+                @click="cambiarPagina(index)"
+                v-for="(number, index) in anunciosFiltradosPaginados"
+                :key="index"
+              >
+                <span>{{ (numero = index + 1) }}</span>
+              </li>
+            </ul>
+            <div class="perPage-container"></div>
           </div>
+        </div>
       </div>
     </div>
+    <div v-if="!load" class="load-gif">
+      <img src="../assets/beer.gif" alt="" />
+    </div>
   </div>
-  <div v-if="!load" class="load-gif">
-    <img src="../assets/beer.gif" alt="">
-  </div>
-</div>
 </template>
 
 <script setup>
@@ -57,7 +59,7 @@ let anuncios = [];
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
 let pagination = ref(8);
-let load = ref(false)
+let load = ref(false);
 const input = useInputStore();
 
 watch(input, () => {
@@ -70,30 +72,32 @@ onBeforeMount(() => {
 
 const callData = async () => {
   const querySnapshot = await getDocs(collection(db, "anuncios"));
-  for(let doc of querySnapshot.docs){
-    const url = await getDownloadURL(reference(st, "anuncios/" + doc.id + "/1"))
-      anuncios.push({
-        titulo: doc.data().titulo,
-        id_anuncio: doc.id,
-        descripcion: doc.data().descripcion,
-        vendedor: doc.data().vendedor,
-        numeroTelefono: doc.data().numeroTelefono,
-        url: url,
-        telefono: {
-          precio: doc.data().telefono.precio,
-          modelo: doc.data().telefono.modelo,
-          estado: doc.data().telefono.estado,
-          sistema: doc.data().telefono.sistema,
-        },
-      });
-  };
+  for (let doc of querySnapshot.docs) {
+    const url = await getDownloadURL(
+      reference(st, "anuncios/" + doc.id + "/1")
+    );
+    anuncios.push({
+      titulo: doc.data().titulo,
+      id_anuncio: doc.id,
+      descripcion: doc.data().descripcion,
+      vendedor: doc.data().vendedor,
+      numeroTelefono: doc.data().numeroTelefono,
+      url: url,
+      telefono: {
+        precio: doc.data().telefono.precio,
+        modelo: doc.data().telefono.modelo,
+        estado: doc.data().telefono.estado,
+        sistema: doc.data().telefono.sistema,
+      },
+    });
+  }
   filtrarAnuncios();
   load.value = true;
-}
+};
 
 const cambiarPagina = (index) => {
   anunciosFiltrados.value = anunciosFiltradosPaginados.value[index];
-}
+};
 
 const filtrarAnuncios = () => {
   anunciosFiltrados.value = anuncios;
@@ -125,7 +129,7 @@ const filtrarAnuncios = () => {
     });
   }
 
-  // Filtro Nuevo, Marcas y Sistemas
+  // Filtro Nuevo, Marcas, Sistemas y Pantalla
 
   if (input.estado === true) {
     anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
@@ -202,42 +206,44 @@ const filtrarAnuncios = () => {
 
   //Filtrar precio
 
-      if(input.precio === false){
-        anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
-          if (p1.telefono.precio > p2.telefono.precio) {
-            // this.filtrarFecha = null;            
-            return 1;
-          }
-          if (p1.telefono.precio < p2.telefono.precio) {            
-            return -1;
-          }
-          return 0;
-        }); 
-      } else if(input.precio === true){
-        anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
-          if (p2.telefono.precio > p1.telefono.precio) {
-            return 1;
-          }
-          if (p2.telefono.precio < p1.telefono.precio) {
-            return -1;
-          }
-          return 0;
-        });        
-      }  
+  if (input.precio === false) {
+    anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
+      if (p1.telefono.precio > p2.telefono.precio) {
+        // this.filtrarFecha = null;
+        return 1;
+      }
+      if (p1.telefono.precio < p2.telefono.precio) {
+        return -1;
+      }
+      return 0;
+    });
+  } else if (input.precio === true) {
+    anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
+      if (p2.telefono.precio > p1.telefono.precio) {
+        return 1;
+      }
+      if (p2.telefono.precio < p1.telefono.precio) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 
-    let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
+  let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
 
-    let counter = 0;
-    let pagination2 = pagination.value;
-    let pagStart = 0;
-    anunciosFiltradosPaginados.value.length = 0
-    while(counter < total){
-      anunciosFiltradosPaginados.value.push(anunciosFiltrados.value.slice(pagStart, pagination2));
-      pagStart += pagination2;
-      pagination2 += pagination2;
-      counter++;
-    }
-    anunciosFiltrados.value = anunciosFiltradosPaginados.value[0];
+  let counter = 0;
+  let pagination2 = pagination.value;
+  let pagStart = 0;
+  anunciosFiltradosPaginados.value.length = 0;
+  while (counter < total) {
+    anunciosFiltradosPaginados.value.push(
+      anunciosFiltrados.value.slice(pagStart, pagination2)
+    );
+    pagStart += pagination2;
+    pagination2 += pagination2;
+    counter++;
+  }
+  anunciosFiltrados.value = anunciosFiltradosPaginados.value[0];
 };
 </script>
 
@@ -306,7 +312,7 @@ const filtrarAnuncios = () => {
 }
 
 .anuncios-paginator {
-    margin: 15px 0;
+  margin: 15px 0;
 }
 
 @media (max-width: 767px) {
@@ -327,6 +333,5 @@ const filtrarAnuncios = () => {
   .anuncios-content {
     grid-template-columns: 1fr;
   }
-
 }
 </style>
