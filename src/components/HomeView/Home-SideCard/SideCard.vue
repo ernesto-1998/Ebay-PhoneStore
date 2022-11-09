@@ -51,6 +51,28 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">
+          <span>Sistema Operativo</span>
+        </div>
+        <hr />
+        <div class="card-body">
+          <div class="card-item">
+            <input type="checkbox" v-model="sistemas" value="android" name="android" id="" /> <span>Android</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="sistemas" value="ios" name="ios" id="" /> <span>IOS</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="sistemas" value="harmony" name="harmony" id="" />
+            <span>Harmony OS</span>
+          </div>
+          <div class="card-item">
+            <input type="checkbox" v-model="sistemas" value="windows" name="windows" id="" />
+            <span>Windows Phone</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -62,6 +84,7 @@ import { useInputStore } from '../../../stores/input';
 
 let marcas = ref([]);
 let sistemas = ref([]);
+let pantallas = ref([]);
 let estado = false;
 const input = useInputStore();
 

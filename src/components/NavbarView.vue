@@ -4,7 +4,7 @@
       <div class="left-container">
         <router-link :to="{name: 'home'}">
           <ion-icon name="phone-portrait-outline"></ion-icon>
-          <span>Smart Store</span>
+          <span>Tienda Cellphone</span>
         </router-link>
       </div>
       <div class="input-container">

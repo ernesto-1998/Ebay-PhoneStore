@@ -1,25 +1,89 @@
 /* app global css */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;1,300&display=swap');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Kanit', sans-serif;
 }
 
 :root {
     --main-color: #FD841F;
     --second-color: #E14D2A;
     --third-color: #CD104D;
-    --text-color: #9C2C77;
-  
+    --fourth-color: #9C2C77;
+    --text-color: #fff;
+
     --width-lg: 90%;
     --width-md: 95%;
     --width-sm: 98%;
-  
+
     --width-sidenav-lg: 20%;
     --width-sidenav-md: 60%;
     --width-sidenav-sm: 90%;
-  
+
     --screen-md: 1024px;
-    --screen-sm: 768px;    
+    --screen-sm: 768px;
+}
+
+a {
+    color: var(--text-color);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.container {
+    width: var(--width-lg);
+    margin: 0 auto;
+}
+
+.container-app {
+    padding-top: 75px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: 16px;
+}
+
+.btnGeneral {
+    padding: 5px 20px;
+    background: var(--second-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+}
+
+.btnGeneral2 {
+    padding: 5px 20px;
+    background: var(--third-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+}
+
+.btnGeneral:hover,
+.btnGeneral2:hover {
+    background: var(--text-color);
+    color: var(--main-color);
+    transform: translateY(-5px);
 }

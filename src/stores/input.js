@@ -8,6 +8,7 @@ export const useInputStore = defineStore({
         hasta: '',
         marcas: [],
         sistemas: [],
+        pantallas: [],
         estado: null,
         precio: null
     }),
@@ -16,16 +17,19 @@ export const useInputStore = defineStore({
             this.text = data
         },
         asignarDesde(data){
-            this.desde = data
+            this.desde = data;
         },
         asignarHasta(data){
-            this.hasta = data
+            this.hasta = data;
         },
         asignarMarcas(data){
-            this.marcas = data
+            this.marcas = data;
         },
         asignarSistemas(data){
-            this.sistemas = data
+            this.sistemas = data;
+        },
+        asignarSistemas(data){
+            this.pantallas = data;
         },
         asignarEstado(data){
             this.estado = data;
