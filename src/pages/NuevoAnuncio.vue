@@ -196,7 +196,7 @@
                 <div class="table-container">
                   <table class="table table-borderless">
                     <!-- <thead> -->
-                    <tr class="table-row-head table-row">
+                    <tr class="table-row-head">
                       <th class="table-ceil">N</th>
                       <th class="table-ceil">Tamaño</th>
                       <th class="table-ceil">Tipo</th>
@@ -235,7 +235,7 @@
                 <div class="table-container">
                   <table class="table table-borderless">
                     <!-- <thead> -->
-                    <tr class="table-row-head table-row">
+                    <tr class="table-row-head">
                       <th class="table-ceil">N</th>
                       <th class="table-ceil">Tamaño</th>
                       <th class="table-ceil">Tipo</th>
@@ -274,10 +274,16 @@
               <div class="img-upload-container">
                 <div class="img-content">
                   <img
+                    v-if="imgControl"
                     :src="
                       imagenes2[contador] ? imagenes2[contador].url : rutaImg
                     "
                     alt=""
+                  />
+                  <q-spinner-hourglass
+                    v-if="!imgControl"
+                    color="purple"
+                    size="10rem"
                   />
                 </div>
                 <div class="upload-content">
@@ -329,6 +335,7 @@ import {
 // const id_usuario = router.currentRoute.value.params.id;
 const rutaImg = ref("src/assets/blank-profile-picture-973460.svg");
 let visible = ref(true);
+let imgControl = ref(true);
 let mostrarMovil = ref(false);
 let borrarKeys = ref({
   numero: null,
@@ -449,11 +456,13 @@ const cargarImagen = async () => {
   if (img.value.files[0]) {
     if (imagenes2.value.length < 4) {
       imagenes.value.push(img.value.files[0]);
+      imgControl.value = false;
       await uploadBytes(
         reference(st, "imagenes/temporal" + conteo.value),
         img.value.files[0]
       ).then((snapshot) => {
         traerImagenTemp();
+        imgControl.value = true;
         img.value.value = "";
         mostrarMovil.value = true;
       });
@@ -551,10 +560,13 @@ const borrarImagen = (numero, index) => {
 
 .item-box {
   margin: 20px 0;
+  /* display: flex;
+  align-items: center; */
 }
 
 .item-title span {
   color: var(--text-color);
+  margin-right: 2rem;
 }
 
 .item-input input,
@@ -769,6 +781,11 @@ textarea {
   height: 100px;
   border-radius: 100px;
   border: 1px solid #fff;
+}
+
+.table-row:hover {
+  cursor: pointer;
+  background-color: var(--second-color);
 }
 /* Third Line */
 
