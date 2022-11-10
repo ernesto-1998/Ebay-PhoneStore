@@ -179,14 +179,14 @@
                 <div class="upload-button">
                   <a @click="cargarImagen()">
                     <div class="icon-cont icon-border">
-                      <ion-icon name="add-outline"></ion-icon>
+                      <i class="bx bx-plus-medical"></i>
                     </div>
                   </a>
                 </div>
                 <div class="delete-button">
                   <a @click="borrarImagen(borrarKeys.numero, borrarKeys.index)">
                     <div class="icon-cont icon-border">
-                      <ion-icon name="remove-outline"></ion-icon>
+                      <i class="bx bx-minus"></i>
                     </div>
                   </a>
                 </div>
