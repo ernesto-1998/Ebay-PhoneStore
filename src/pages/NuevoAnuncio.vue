@@ -192,7 +192,46 @@
                 </div>
               </div>
 
-              <div class="img-table">
+              <div class="img-table visibilidad2">
+                <div class="table-container">
+                  <table class="table table-borderless">
+                    <!-- <thead> -->
+                    <tr class="table-row-head table-row">
+                      <th class="table-ceil">N</th>
+                      <th class="table-ceil">Tamaño</th>
+                      <th class="table-ceil">Tipo</th>
+                    </tr>
+                    <!-- </thead> -->
+                    <!-- <tbody v-if="visible === true"> -->
+                    <tr
+                      @click="cambiarImagen(value.numero, index)"
+                      v-for="(value, index) in imagenes2"
+                      :key="index"
+                      class="table-row-body table-row"
+                    >
+                      <td class="table-ceil">{{ index + 1 }}</td>
+                      <td class="table-ceil">{{ value.size }} kb</td>
+                      <td class="table-ceil">
+                        {{
+                          value.type === "image/jpeg"
+                            ? ".jpg"
+                            : value.type === "image/png"
+                            ? ".png"
+                            : ".gif"
+                        }}
+                      </td>
+                    </tr>
+                    <!-- </tbody> -->
+                  </table>
+                  <b-spinner
+                    v-if="visible === false"
+                    style="width: 5rem; height: 5rem"
+                    class="ms-md-10 mt-md-3"
+                    variant="primary"
+                  ></b-spinner>
+                </div>
+              </div>
+              <div v-if="mostrarMovil === true" class="img-table visibilidad">
                 <div class="table-container">
                   <table class="table table-borderless">
                     <!-- <thead> -->
@@ -290,6 +329,7 @@ import {
 // const id_usuario = router.currentRoute.value.params.id;
 const rutaImg = ref("src/assets/blank-profile-picture-973460.svg");
 let visible = ref(true);
+let mostrarMovil = ref(false);
 let borrarKeys = ref({
   numero: null,
   index: null,
@@ -415,6 +455,7 @@ const cargarImagen = async () => {
       ).then((snapshot) => {
         traerImagenTemp();
         img.value.value = "";
+        mostrarMovil.value = true;
       });
     } else {
       alert("Solamente puede subir 4 imagenes como máximo");
@@ -486,6 +527,10 @@ const borrarImagen = (numero, index) => {
 </script>
 
 <style scoped>
+.visibilidad {
+  display: none;
+}
+
 .main-container {
   position: relative;
   margin-bottom: 75px;
@@ -678,7 +723,13 @@ textarea {
 .delete-button {
   font-size: 5rem;
   margin-bottom: 2rem;
+  background-color: var(--second-color);
+  border-radius: 50px;
 }
+
+/* .upload-button ion-icon,
+.delete-button ion-icon {
+} */
 
 .upload-button:hover,
 .delete-button:hover {
@@ -755,7 +806,15 @@ textarea {
   margin: 0 15px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 820px) {
+  .visibilidad {
+    display: flex;
+  }
+
+  .visibilidad2 {
+    display: none;
+  }
+
   .item-input input {
     width: 90%;
   }
@@ -771,6 +830,10 @@ textarea {
   .third-cuadrant {
     display: flex;
     flex-direction: column;
+  }
+
+  .img-table {
+    margin: 2rem 1rem;
   }
 
   .first-line {
