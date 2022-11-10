@@ -18,7 +18,7 @@
             >
               <router-link
                 :to="{ name: 'anuncio', params: { id: anuncio.id_anuncio } }"
-                ><Card :object="anuncio"
+                ><CardView :object="anuncio"
               /></router-link>
             </div>
           </div>
@@ -47,7 +47,7 @@
 <script setup>
 import { ref, onMounted, watch, onBeforeMount } from "vue";
 import { useInputStore } from "../stores/input";
-import Card from "../components/Cards/CardView.vue";
+import CardView from "../components/Cards/CardView.vue";
 import SideCard from "../components/HomeView/Home-SideCard/SideCard.vue";
 import Price from "../components/HomeView/Price-Order/PriceFilter.vue";
 import Order from "../components/HomeView/Price-Order/OrderFilter.vue";
@@ -73,21 +73,23 @@ onBeforeMount(() => {
 const callData = async () => {
   const querySnapshot = await getDocs(collection(db, "anuncios"));
   for (let doc of querySnapshot.docs) {
-    const url = await getDownloadURL(
-      reference(st, "anuncios/" + doc.id + "/1")
-    );
     anuncios.push({
-      titulo: doc.data().titulo,
       id_anuncio: doc.id,
+      titulo: doc.data().titulo,
+      nombre: doc.data().nombre,
+      telefonoContacto: doc.data().telefonoContacto,
       descripcion: doc.data().descripcion,
-      vendedor: doc.data().vendedor,
-      numeroTelefono: doc.data().numeroTelefono,
-      url: url,
+      precio: doc.data().precio,
+      foto: await getDownloadURL(reference(st, "anuncios/" + doc.id + "/1")),
+      fecha: doc.data().fecha === undefined ? "" : doc.data().fecha.toDate(),
       telefono: {
-        precio: doc.data().telefono.precio,
-        modelo: doc.data().telefono.modelo,
         estado: doc.data().telefono.estado,
+        marca: doc.data().telefono.marca,
+        modelo: doc.data().telefono.modelo,
+        pantalla: doc.data().telefono.pantalla,
         sistema: doc.data().telefono.sistema,
+        rom: doc.data().telefono.rom,
+        ram: doc.data().telefono.ram,
       },
     });
   }
@@ -101,6 +103,7 @@ const cambiarPagina = (index) => {
 
 const filtrarAnuncios = () => {
   anunciosFiltrados.value = anuncios;
+  console.log(anuncios);
 
   // Filtro input navbar
 
@@ -228,6 +231,8 @@ const filtrarAnuncios = () => {
       return 0;
     });
   }
+
+  console.log(anunciosFiltrados.value);
 
   let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
 

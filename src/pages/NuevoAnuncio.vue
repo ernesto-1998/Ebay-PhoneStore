@@ -338,9 +338,9 @@ const guardarAnuncio = async () => {
   if (validarFormulario()) {
     if (imagenes.value.length > 0) {
       const docSnap = await addDoc(collection(db, "anuncios"), {
-        // id_usuario: id_usuario,
+        id_usuario: id_usuario,
         titulo: anuncio.value.titulo.trim(),
-        vendedor: anuncio.value.nombre.trim(),
+        nombre: anuncio.value.nombre.trim(),
         numeroTelefono: anuncio.value.telefonoContacto,
         fecha: new Date(),
         precio: anuncio.value.precio,
@@ -648,12 +648,24 @@ textarea {
   /* background: var(--main-color); */
   /* display: flex;
   justify-content: center; */
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
   padding: 15px 0;
 }
 
 .img-box {
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 1rem; */
+  display: grid;
+  grid-template-columns: 100px 1fr 30%;
+  padding: 1rem 5rem;
+}
+
+.img-table {
+  display: flex;
+  justify-content: center;
 }
 
 .img-buttons {
@@ -683,8 +695,9 @@ textarea {
 }
 
 .img-content {
-  width: 250px;
-  height: 250px;
+  /* width: 250px;
+  height: 250px; */
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
   margin-bottom: 15px;
@@ -704,78 +717,28 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100px;
+  height: 100px;
   border-radius: 100px;
   border: 1px solid #fff;
 }
-
-/* .upload-button {
-  display: flex;
-  justify-content: center;
-} */
-
-/* .list-container {
-  padding: 15px 0;
-  margin-left: 15px;
-}
-
-.list-item {
-  display: flex;
-  align-items: center;
-  background: var(--second-color);
-  color: var(--text-color);
-  margin: 10px 0;
-}
-
-.list-item-content {
-  display: flex;
-}
-
-.list-item-number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 75px;
-  border-right: 1px solid var(--text-color);
-  cursor: pointer;
-  transition: 250ms ease-in-out;
-}
-
-.list-item-number:hover {
-  background: var(--text-color);
-  color: var(--main-color);
-  transform: translateY(-3px);
-}
-
-.list-item-number span {
-  font-size: 1.5rem;
-}
-
-.list-item-icon {
-  padding: 15px 25px;
-  cursor: pointer;
-  background: var(--third-color);
-  transition: 250ms ease-in-out;
-}
-
-.list-item-icon:hover {
-  background: var(--text-color);
-  color: var(--main-color);
-  transform: translateY(-3px);
-}
-
-.list-item-icon ion-icon {
-  font-size: 1.5rem;
-} */
-
 /* Third Line */
 
-.third-line {
+/* .third-line {
   width: 100%;
   padding: 15px;
   position: fixed;
   bottom: 0;
   background: var(--main-color);
-}
+} */
+
+/* .img-container {
+} */
+
+/* .img-box {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr;
+} */
 
 .buttons-container {
   width: 100%;
@@ -814,6 +777,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .img-box {
+    grid-template-columns: 95%;
+  }
+
   .img-content {
     width: 80%;
     margin: 0 auto;
@@ -821,7 +788,12 @@ textarea {
     margin-bottom: 15px;
   }
 
-  .list-container {
+  .img-buttons {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  /* .list-container {
     margin-left: 0;
     padding: 0;
   }
@@ -837,6 +809,6 @@ textarea {
   .list-item-content {
     display: flex;
     background: var(--second-color);
-  }
+  } */
 }
 </style>

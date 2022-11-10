@@ -1,115 +1,120 @@
 <template>
-<div>
-    
+  <div>
     <div v-if="load" class="container anuncio-container">
-        <div class="first-line">
-            <Carousel :array="imagenes"/>
-            <AnuncioInfo :object="anuncio"/>
-        </div>
-        <div class="second-line">
-            <TelefonoDetalles :object="anuncio"/>
-        </div>
+      <div class="first-line">
+        <CarouselView :array="imagenes" />
+        <AnuncioInfo :object="anuncio" />
+      </div>
+      <div class="second-line">
+        <TelefonoDetalles :object="anuncio" />
+      </div>
     </div>
     <div v-if="!load" class="load-gif">
-        <img src="../assets/beer.gif" alt="">
+      <img src="../assets/beer.gif" alt="" />
     </div>
-
-</div>
+  </div>
 </template>
 
 <script setup>
-
-import { ref, onMounted } from 'vue';
-import router from '../router/index';
+import { ref, onBeforeMount } from "vue";
+import router from "../router/index";
 import { ref as reference, listAll, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
 import { db, st } from "../firebase";
-import Carousel from '../components/Anuncio/CarouselView.vue'
-import AnuncioInfo from '../components/Anuncio/AnuncioInfo.vue'
-import TelefonoDetalles from '../components/Anuncio/TelefonoDetalles.vue'
+import CarouselView from "../components/Anuncio/CarouselView.vue";
+import AnuncioInfo from "../components/Anuncio/AnuncioInfo.vue";
+import TelefonoDetalles from "../components/Anuncio/TelefonoDetalles.vue";
 
 const id_anuncio = router.currentRoute.value.params.id;
 let imagenes = ref([]);
 let load = ref(false);
 let anuncio = ref({
-    titulo: '',
-    vendedor: '',
-    numeroTelefono: '',
-    descripcion: '',
-    telefono: {
-        estado: "",
-        modelo: "",
-        sistema: "",
-        precio: ""
-    }
+  titulo: "",
+  nombre: "",
+  telefonoContacto: null,
+  descripcion: "",
+  precio: null,
+  foto: null,
+  fecha: "",
+  telefono: {
+    estado: "",
+    marca: "",
+    modelo: "",
+    pantalla: null,
+    sistema: "",
+    rom: null,
+    ram: null,
+  },
+});
 
-})
+onBeforeMount(async () => {
+  const listRef = reference(st, "anuncios/" + id_anuncio);
+  const res = await listAll(listRef);
+  for (let itemRef of res.items) {
+    imagenes.value.push(await getDownloadURL(itemRef));
+  }
 
-onMounted(async () => {
-    const listRef = reference(st, 'anuncios/' + id_anuncio);
-    const res = await listAll(listRef);
-    for(let itemRef of res.items){
-        const url = await getDownloadURL(itemRef)
-        imagenes.value.push(url)         
-    }        
-    
-    const docRef = doc(db, "anuncios", id_anuncio);
-    const docSnap = await getDoc(docRef);
+  console.log(imagenes.value);
 
-    if (docSnap.exists()) {
-        anuncio.value = {
-            titulo: docSnap.data().titulo,
-            vendedor: docSnap.data().vendedor,
-            numeroTelefono: docSnap.data().numeroTelefono,
-            descripcion: docSnap.data().descripcion,
-            telefono: {
-                estado: docSnap.data().telefono.estado,
-                modelo: docSnap.data().telefono.modelo,
-                sistema: docSnap.data().telefono.sistema,
-                precio: docSnap.data().telefono.precio
-            }
-        }
+  const docRef = doc(db, "anuncios", id_anuncio);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    anuncio.value = {
+      id_anuncio: docSnap.id,
+      titulo: docSnap.data().titulo,
+      nombre: docSnap.data().nombre,
+      telefonoContacto: docSnap.data().telefonoContacto,
+      descripcion: docSnap.data().descripcion,
+      precio: docSnap.data().precio,
+      // foto: url,
+      fecha:
+        docSnap.data().fecha === undefined ? "" : docSnap.data().fecha.toDate(),
+      telefono: {
+        estado: docSnap.data().telefono.estado,
+        marca: docSnap.data().telefono.marca,
+        modelo: docSnap.data().telefono.modelo,
+        pantalla: docSnap.data().telefono.pantalla,
+        sistema: docSnap.data().telefono.sistema,
+        rom: docSnap.data().telefono.rom,
+        ram: docSnap.data().telefono.ram,
+      },
+    };
     load.value = true;
-    } else {
-        console.log("No such document!");
-    }
-
-
-
-})
-
+  } else {
+    console.log("No such document!");
+  }
+});
 </script>
 
 <style scoped>
-
 .anuncio-container {
-    margin-top: 10px;
+  margin-top: 10px;
 }
-    
+
 .first-line {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .second-line {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .first-line {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+  .first-line {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 @media (max-width: 767px) {
-    .first-line {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+  .first-line {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
-
 </style>
