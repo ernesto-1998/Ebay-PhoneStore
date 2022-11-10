@@ -385,10 +385,10 @@ const guardarAnuncio = async () => {
   if (validarFormulario()) {
     if (imagenes.value.length > 0) {
       const docSnap = await addDoc(collection(db, "anuncios"), {
-        id_usuario: id_usuario,
+        // id_usuario: id_usuario,
         titulo: anuncio.value.titulo.trim(),
         nombre: anuncio.value.nombre.trim(),
-        numeroTelefono: anuncio.value.telefonoContacto,
+        telefonoContacto: anuncio.value.telefonoContacto,
         fecha: new Date(),
         precio: anuncio.value.precio,
         descripcion: anuncio.value.descripcion,

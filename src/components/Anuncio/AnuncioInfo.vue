@@ -1,24 +1,17 @@
 <template>
   <div class="info-container">
-    <div class="info-title">
-      <span align="center">{{ props.object.descripcion }}</span>
+    <div class="info-descripcion">
+      <span> {{ object.descripcion }} </span>
     </div>
-    <div class="item-info">
-      <span>Vendedor: </span>
-      <span>{{ props.object.vendedor }}</span>
+    <div class="info-precio">
+      <span> $ {{ object.precio }}</span>
     </div>
-    <div class="item-info">
-      <span>Teléfono (Contacto) : </span>
-      <span>{{ props.object.numeroTelefono }}</span>
+    <div class="info-button_comprar">
+      <button class="btn btnGeneral">Comprar</button>
     </div>
-    <div class="item-info">
-      <span>Precio: </span>
-      <span>${{ props.object.telefono.precio }}</span>
-    </div>
-    <div class="descripcion-container">
-      <div class="descripcion-content">
-        <span>{{ props.object.descripcion }}</span>
-      </div>
+    <div class="info-vendedor-telefono">
+      <span>Vendedor: {{ object.nombre }}</span>
+      <span>Teléfono: {{ object.telefonoContacto }}</span>
     </div>
   </div>
 </template>
@@ -29,66 +22,33 @@ const props = defineProps({ object: Object });
 
 <style scoped>
 .info-container {
-  background: var(--main-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  padding: 2rem;
 }
 
-.info-title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 7px 0;
+.info-descripcion {
+  font-size: 1.1rem;
 }
 
-.info-title span {
-  color: var(--text-color);
-  font-size: 1.9rem;
-  padding: 0 7px;
+.info-precio {
+  font-size: 2.5rem;
+  margin: 0.8rem 0;
 }
 
-.item-info {
-  width: 80%;
-  display: flex;
-  margin: 0 auto;
-  color: var(--text-color);
-  font-size: 1.5rem;
-  /* margin-top: 25px; */
-}
-
-.item-info span:first-child {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.descripcion-container {
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  padding: 10px;
-}
-
-.descripcion-content {
-  padding: 10px;
-  background: var(--second-color);
-  color: var(--text-color);
+.info-vendedor-telefono {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: start;
+  /* display: flex;
+  justify-content: space-between; */
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  padding: 0.7rem 1.5rem;
+  border: 0.2rem solid var(--main-color);
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .item-info {
-    margin: 15px 15px;
-  }
 }
 
 @media (max-width: 767px) {
-  .item-info {
-    margin: 15px 15px;
-  }
-
-  .descripcion-content {
-    height: 200px;
-    overflow: auto;
-  }
 }
 </style>

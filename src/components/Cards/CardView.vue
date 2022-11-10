@@ -5,11 +5,12 @@
     </div>
     <div class="card-body">
       <div class="card-title">
-        <span>{{ props.object.telefono.modelo }}</span>
+        <span>
+          <strong>$ {{ props.object.precio }}</strong></span
+        >
       </div>
-      <div class="card-price-estado">
-        <span>${{ props.object.precio }}</span>
-        <span> {{ props.object.telefono.estado }} </span>
+      <div class="card-descripcion">
+        <span>${{ props.object.descripcion }}</span>
       </div>
     </div>
   </div>
@@ -37,31 +38,29 @@ const props = defineProps({ object: Object });
 }
 
 .card-body {
-  padding: 10px;
-  /* height: 100%; */
+  padding: 0.3rem 0.9rem;
+  height: 10rem;
+  overflow: hidden;
 }
 
 .card-title {
   padding: 0 7px;
   font-size: 1.35rem;
   color: #000;
-  height: 70px;
-  overflow-y: hidden;
+  text-align: center;
 }
 
-.card-price-estado {
+.card-descripcion {
   display: flex;
   justify-content: space-between;
-  font-size: 1.25rem;
-  color: var(--main-color);
-  position: relative;
-  bottom: 0;
+  font-size: 1rem;
+  color: #000;
 }
-.card-price-estado span:nth-child(1) {
+/* .card-price-estado span:nth-child(1) {
   font-size: 1.5rem;
 }
 
 .card-price-estado span:nth-child(2) {
   font-weight: bold;
-}
+} */
 </style>

@@ -5,8 +5,14 @@
         <CarouselView :array="imagenes" />
         <AnuncioInfo :object="anuncio" />
       </div>
+      <div class="anuncio-title">
+        <span>Descripción</span>
+      </div>
       <div class="second-line">
         <TelefonoDetalles :object="anuncio" />
+        <div class="anuncio-textarea">
+          {{ anuncio.descripcion }}
+        </div>
       </div>
     </div>
     <div v-if="!load" class="load-gif">
@@ -67,7 +73,6 @@ onBeforeMount(async () => {
       telefonoContacto: docSnap.data().telefonoContacto,
       descripcion: docSnap.data().descripcion,
       precio: docSnap.data().precio,
-      // foto: url,
       fecha:
         docSnap.data().fecha === undefined ? "" : docSnap.data().fecha.toDate(),
       telefono: {
@@ -98,8 +103,20 @@ onBeforeMount(async () => {
   gap: 20px;
 }
 
+.anuncio-title {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
 .second-line {
   margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.anuncio-textarea {
+  padding: 1rem;
+  border: 0.1rem solid #000;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
