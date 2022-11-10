@@ -231,7 +231,7 @@
                   ></b-spinner>
                 </div>
               </div>
-              <div v-if="mostrarMovil === true" class="img-table visibilidad">
+              <div class="img-table visibilidad">
                 <div class="table-container">
                   <table class="table table-borderless">
                     <!-- <thead> -->
@@ -527,13 +527,10 @@ const borrarImagen = (numero, index) => {
 </script>
 
 <style scoped>
-.visibilidad {
-  display: none;
-}
-
 .main-container {
   position: relative;
   margin-bottom: 75px;
+  font-size: 1.2rem;
 }
 
 .first-line {
@@ -804,6 +801,10 @@ textarea {
 
 .buttons-content a {
   margin: 0 15px;
+}
+
+.visibilidad {
+  display: none;
 }
 
 @media (max-width: 820px) {

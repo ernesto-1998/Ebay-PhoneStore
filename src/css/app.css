@@ -29,6 +29,10 @@
     --screen-sm: 768px;
 }
 
+/* body {
+    background-color: #FFD384;
+} */
+
 a {
     color: var(--text-color);
 }

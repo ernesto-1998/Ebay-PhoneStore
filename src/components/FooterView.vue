@@ -42,6 +42,7 @@
 .names-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
   color: var(--text-color);
   font-size: 1rem;

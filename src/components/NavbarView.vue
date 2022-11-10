@@ -203,7 +203,7 @@ header {
 }
 
 .input-content input {
-  width: 495px;
+  width: 430px;
   outline: none;
   padding: 0 33px;
   height: 100%;
@@ -216,7 +216,7 @@ header {
 
 .input-content input:focus {
   background: var(--second-color);
-  width: 510px;
+  width: 480px;
 }
 
 .input-content input::placeholder {
@@ -257,6 +257,11 @@ header {
 .background {
   background-color: var(--second-color);
   border-radius: 50px;
+}
+
+.background:hover {
+  background-color: var(--text-color);
+  color: var(--main-color);
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

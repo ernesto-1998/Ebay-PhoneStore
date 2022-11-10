@@ -6,7 +6,7 @@
       </div>
       <div class="right-grid-container">
         <div class="price-order-container">
-          <Price />
+          <Price class="visibility" />
           <Order />
         </div>
         <div class="anuncios-container">
@@ -253,6 +253,10 @@ const filtrarAnuncios = () => {
 </script>
 
 <style scoped>
+.visibility {
+  display: flex;
+}
+
 .main-container {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -321,9 +325,7 @@ const filtrarAnuncios = () => {
 }
 
 @media (max-width: 767px) {
-  .left-grid-container {
-    /* width: var(--width-sidenav-sm);  */
-    /* font-size: 1.5rem; */
+  .visibility {
     display: none;
   }
 
@@ -331,6 +333,11 @@ const filtrarAnuncios = () => {
     grid-template-columns: 1fr;
   }
 
+  .left-grid-container {
+    /* width: var(--width-sidenav-sm);  */
+    /* font-size: 1.5rem; */
+    display: none;
+  }
   .price-order-container {
     grid-template-columns: 1fr;
   }
