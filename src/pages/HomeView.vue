@@ -120,7 +120,7 @@ const filtrarAnuncios = () => {
     parseInt(input.desde);
     parseInt(input.hasta);
     anunciosFiltrados.value = anunciosFiltrados.value.filter((x) => {
-      return x.telefono.precio > input.desde;
+      return x.precio > input.desde;
     });
   }
 
@@ -128,7 +128,7 @@ const filtrarAnuncios = () => {
     parseInt(input.desde);
     parseInt(input.hasta);
     anunciosFiltrados.value = anunciosFiltrados.value.filter((x) => {
-      return x.telefono.precio < input.hasta;
+      return x.precio < input.hasta;
     });
   }
 
@@ -152,26 +152,33 @@ const filtrarAnuncios = () => {
     anunciosTemporales.push(...anunciosFiltrados.value);
     anunciosFiltrados.value = anunciosTemporales.filter((x) => {
       let regex = new RegExp(input.marcas[0], "i");
-      return regex.test(x.telefono.modelo);
+      return regex.test(x.telefono.marca);
     });
     if (input.marcas[1] !== undefined) {
       let anuncios2 = anunciosTemporales.filter((x) => {
         let regex = new RegExp(input.marcas[1], "i");
-        return regex.test(x.telefono.modelo);
+        return regex.test(x.telefono.marca);
       });
       anunciosFiltrados.value.push(...anuncios2);
     }
     if (input.marcas[2] !== undefined) {
       let anuncios2 = anunciosTemporales.filter((x) => {
         let regex = new RegExp(input.marcas[2], "i");
-        return regex.test(x.telefono.modelo);
+        return regex.test(x.telefono.marca);
       });
       anunciosFiltrados.value.push(...anuncios2);
     }
     if (input.marcas[3] !== undefined) {
       let anuncios2 = anunciosTemporales.filter((x) => {
         let regex = new RegExp(input.marcas[3], "i");
-        return regex.test(x.telefono.modelo);
+        return regex.test(x.telefono.marca);
+      });
+      anunciosFiltrados.value.push(...anuncios2);
+    }
+    if (input.marcas[4] !== undefined) {
+      let anuncios2 = anunciosTemporales.filter((x) => {
+        let regex = new RegExp(input.marcas[3], "i");
+        return regex.test(x.telefono.marca);
       });
       anunciosFiltrados.value.push(...anuncios2);
     }
@@ -211,21 +218,21 @@ const filtrarAnuncios = () => {
 
   if (input.precio === false) {
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
-      if (p1.telefono.precio > p2.telefono.precio) {
+      if (p1.precio > p2.precio) {
         // this.filtrarFecha = null;
         return 1;
       }
-      if (p1.telefono.precio < p2.telefono.precio) {
+      if (p1.precio < p2.precio) {
         return -1;
       }
       return 0;
     });
   } else if (input.precio === true) {
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
-      if (p2.telefono.precio > p1.telefono.precio) {
+      if (p2.precio > p1.precio) {
         return 1;
       }
-      if (p2.telefono.precio < p1.telefono.precio) {
+      if (p2.precio < p1.precio) {
         return -1;
       }
       return 0;
