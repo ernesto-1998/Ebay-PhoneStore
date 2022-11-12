@@ -7,7 +7,7 @@
       <span> $ {{ object.precio }}</span>
     </div>
     <div class="info-button_comprar">
-      <button class="btn btnGeneral">Comprar</button>
+      <button class="btnA btnGeneralA">Comprar</button>
     </div>
     <div class="info-vendedor-telefono">
       <span>Vendedor: {{ object.nombre }}</span>

@@ -1,15 +1,15 @@
 <template>
-  <div class="card-container">
-    <div class="card-img">
+  <div class="cardA-container">
+    <div class="cardA-img">
       <img :src="props.object.foto" alt="" />
     </div>
-    <div class="card-body">
-      <div class="card-title">
+    <div class="cardA-body">
+      <div class="cardA-title">
         <span>
           <strong>$ {{ props.object.precio }}</strong></span
         >
       </div>
-      <div class="card-descripcion">
+      <div class="cardA-descripcion">
         <span>${{ props.object.descripcion }}</span>
       </div>
     </div>
@@ -21,40 +21,42 @@ const props = defineProps({ object: Object });
 </script>
 
 <style scoped>
-.card-container {
+.cardA-container {
   transition: 200ms ease-in-out;
   box-shadow: 0px 10px 13px -7px #000000;
   height: 100%;
   cursor: pointer;
 }
 
-.card-container:hover {
+.cardA-container:hover {
   transform: translateY(-10px);
   box-shadow: 5px 5px 15px 5px #000000;
 }
 
-.card-img {
+.cardA-img {
   height: 250px;
 }
 
-.card-body {
+.cardA-body {
   padding: 0.3rem 0.9rem;
   height: 10rem;
   overflow: hidden;
 }
 
-.card-title {
+.cardA-title {
   padding: 0 7px;
   font-size: 1.35rem;
   color: #000;
   text-align: center;
 }
 
-.card-descripcion {
+.cardA-descripcion {
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
   color: #000;
+  overflow: hidden;
+  padding: 0.3rem 0.2rem;
 }
 /* .card-price-estado span:nth-child(1) {
   font-size: 1.5rem;

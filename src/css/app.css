@@ -29,12 +29,18 @@
     --screen-sm: 768px;
 }
 
-/* body {
-    background-color: #FFD384;
-} */
+body {
+    color: var(--text-color);
+}
+
+hr {
+    color: #000;
+}
 
 a {
     color: var(--text-color);
+    list-style: none;
+    text-decoration: none;
 }
 
 img {
@@ -53,7 +59,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.container {
+.container-space {
     width: var(--width-lg);
     margin: 0 auto;
 }
@@ -62,14 +68,14 @@ input[type=number] {
     padding-top: 75px;
 }
 
-.btn {
+.btnA {
     border: none;
     outline: none;
     padding: 7px 15px;
     border-radius: 16px;
 }
 
-.btnGeneral {
+.btnGeneralA {
     padding: 5px 20px;
     background: var(--second-color);
     color: var(--text-color);
@@ -77,7 +83,7 @@ input[type=number] {
     transition: 250ms ease-in-out;
 }
 
-.btnGeneral2 {
+.btnGeneralA2 {
     padding: 5px 20px;
     background: var(--third-color);
     color: var(--text-color);
@@ -85,8 +91,8 @@ input[type=number] {
     transition: 250ms ease-in-out;
 }
 
-.btnGeneral:hover,
-.btnGeneral2:hover {
+.btnGeneralA:hover,
+.btnGeneralA2:hover {
     background: var(--text-color);
     color: var(--main-color);
     transform: translateY(-5px);

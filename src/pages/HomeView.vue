@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="load" class="container main-container">
+    <div v-if="load" class="container-space main-container">
       <div class="left-grid-container">
         <SideCard />
       </div>
@@ -103,14 +103,13 @@ const cambiarPagina = (index) => {
 
 const filtrarAnuncios = () => {
   anunciosFiltrados.value = anuncios;
-  console.log(anuncios);
 
   // Filtro input navbar
 
   if (input.text !== "") {
     anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
       let regex = new RegExp(input.text, "i");
-      return regex.test(t.telefono.modelo);
+      return regex.test(t.telefono.marca);
     });
   }
 
@@ -238,8 +237,6 @@ const filtrarAnuncios = () => {
       return 0;
     });
   }
-
-  console.log(anunciosFiltrados.value);
 
   let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
 

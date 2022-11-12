@@ -15,6 +15,10 @@ import Footer from "./components/FooterView.vue";
 </script>
 
 <style>
+/* .container-app {
+  height: 100%;
+} */
+
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
     width: var(--width-md);

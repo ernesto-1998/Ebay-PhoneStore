@@ -1,18 +1,18 @@
 <template>
   <div class="sidecard-container">
-    <div class="card-container">
+    <div class="cardA-container">
       <div class="sidecard-switch">
         <span>Nuevo</span>
         <input @click="asignarEstado" type="checkbox" value="true" />
       </div>
       <hr />
-      <div class="card">
-        <div class="card-title">
+      <div class="cardA">
+        <div class="cardA-title">
           <span>Marca</span>
         </div>
         <hr />
-        <div class="card-body">
-          <div class="card-item">
+        <div class="cardA-body">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="marcas"
@@ -22,7 +22,7 @@
             />
             <span>Samsung</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="marcas"
@@ -32,7 +32,7 @@
             />
             <span>Huawei</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="marcas"
@@ -42,7 +42,7 @@
             />
             <span>Nokia</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="marcas"
@@ -52,7 +52,7 @@
             />
             <span>Iphone</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="marcas"
@@ -64,13 +64,13 @@
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">
+      <div class="cardA">
+        <div class="cardA-title">
           <span>Sistema Operativo</span>
         </div>
         <hr />
-        <div class="card-body">
-          <div class="card-item">
+        <div class="cardA-body">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -80,7 +80,7 @@
             />
             <span>Android</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -90,7 +90,7 @@
             />
             <span>Windows</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -102,13 +102,13 @@
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">
+      <div class="cardA">
+        <div class="cardA-title">
           <span>Pantalla</span>
         </div>
         <hr />
-        <div class="card-body">
-          <div class="card-item">
+        <div class="cardA-body">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -118,7 +118,7 @@
             />
             <span>6.0</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -128,7 +128,7 @@
             />
             <span>5.5</span>
           </div>
-          <div class="card-item">
+          <div class="cardA-item">
             <input
               type="checkbox"
               v-model="sistemas"
@@ -171,7 +171,7 @@ const asignarEstado = () => {
   height: 100%;
 }
 
-.card-container {
+.cardA-container {
   background: var(--main-color);
   padding-top: 20px;
 }
@@ -192,11 +192,12 @@ const asignarEstado = () => {
   margin-left: 10px;
 }
 
-.card {
+.cardA {
   padding: 8px 40px 15px;
+  background-color: var(--main-color);
 }
 
-.card-title {
+.cardA-title {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -204,22 +205,22 @@ const asignarEstado = () => {
   font-size: 1.2rem;
 }
 
-.card-body {
+.cardA-body {
   margin-top: 10px;
 }
 
-.card:last-child .card-body {
+.cardA:last-child .cardA-body {
   margin-bottom: 10px;
 }
 
-.card-item {
+.cardA-item {
   display: flex;
   align-items: center;
   justify-content: start;
   color: var(--text-color);
 }
 
-.card-item span {
+.cardA-item span {
   margin-left: 10px;
 }
 </style>

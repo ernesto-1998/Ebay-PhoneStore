@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <div class="container">
+    <div class="container-space">
       <div class="first-line">
         <div class="first-cuadrant">
           <div class="form-content">
@@ -157,8 +157,8 @@
           </div>
           <div class="buttons-container">
             <div class="buttons-content">
-              <a class="btn btnGeneral" @click="guardarAnuncio">Enviar</a>
-              <router-link :to="{ name: 'home' }" class="btn btnGeneral2"
+              <a class="btnA btnGeneralA" @click="guardarAnuncio">Enviar</a>
+              <router-link :to="{ name: 'home' }" class="btnA btnGeneralA2"
                 >Cancelar</router-link
               >
             </div>
@@ -529,6 +529,8 @@ const borrarImagen = (numero, index) => {
       .catch((error) => {
         console.log(error);
       });
+    borrarKeys.value.numero = null;
+    borrarKeys.value.index = null;
   } else {
     alert("Debes seleccionar una imagen para eliminarla");
   }

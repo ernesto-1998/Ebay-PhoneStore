@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="load" class="container anuncio-container">
+    <div v-if="load" class="container-space anuncio-container">
       <div class="first-line">
         <CarouselView :array="imagenes" />
         <AnuncioInfo :object="anuncio" />
@@ -95,6 +95,7 @@ onBeforeMount(async () => {
 <style scoped>
 .anuncio-container {
   margin-top: 10px;
+  color: #000;
 }
 
 .first-line {
@@ -132,6 +133,11 @@ onBeforeMount(async () => {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .second-line {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 </style>

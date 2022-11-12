@@ -21,6 +21,9 @@
 
 <style scoped>
 .footer-container {
+  /* position: sticky;
+  bottom: 0;
+  width: 100%; */
   background-color: var(--third-color);
   margin-top: 30px;
   /* padding-top: 30px; */

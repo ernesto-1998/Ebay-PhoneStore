@@ -4,32 +4,39 @@
       <span>Ordenar anuncios por: </span>
     </div>
     <div class="order-content">
-      <a class="btn btnGeneral a-link" @click="ordenarPrecio"><ion-icon v-if="precio === false" name="arrow-down-circle-outline"></ion-icon><ion-icon v-if="precio === true" name="arrow-up-circle-outline"></ion-icon>Precio</a>
-      <a class="btn btnGeneral2">Fecha</a>
+      <a class="btnA btnGeneralA a-link" @click="ordenarPrecio"
+        ><ion-icon
+          v-if="precio === false"
+          name="arrow-down-circle-outline"
+        ></ion-icon
+        ><ion-icon
+          v-if="precio === true"
+          name="arrow-up-circle-outline"
+        ></ion-icon
+        >Precio</a
+      >
+      <a class="btnA btnGeneralA2">Fecha</a>
     </div>
   </div>
 </template>
 
 <script setup>
-
-import { ref, onUpdated } from 'vue';
-import { useInputStore } from '../../../stores/input';
+import { ref, onUpdated } from "vue";
+import { useInputStore } from "../../../stores/input";
 
 let precio = ref(false);
 let input = useInputStore();
 
 const ordenarPrecio = () => {
-    precio.value = !precio.value;
-    input.asignarPrecio(precio.value); 
-}
-
+  precio.value = !precio.value;
+  input.asignarPrecio(precio.value);
+};
 </script>
 
 <style scoped>
-
 .a-link {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .order-container {
@@ -53,9 +60,7 @@ const ordenarPrecio = () => {
 }
 
 ion-icon {
-    margin-right: 5px;
-    font-size: 1.5rem;
+  margin-right: 5px;
+  font-size: 1.5rem;
 }
-
-
 </style>

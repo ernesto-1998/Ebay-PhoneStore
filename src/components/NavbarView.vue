@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <nav class="container navigation visibility">
+    <nav class="container-space navigation visibility">
       <div class="left-container">
         <router-link :to="{ name: 'home' }">
           <ion-icon name="megaphone-outline"></ion-icon>
@@ -26,10 +26,10 @@
         </div>
       </div>
       <div class="buttons-container">
-        <router-link :to="{ name: 'home' }" class="btn btnGeneral m-l"
+        <router-link :to="{ name: 'home' }" class="btnA btnGeneralA m-l"
           >Inicio</router-link
         >
-        <router-link :to="{ name: 'home' }" class="btn btnGeneral m-l"
+        <router-link :to="{ name: 'home' }" class="btnA btnGeneralA m-l"
           >Estadisticas</router-link
         >
       </div>
@@ -51,7 +51,7 @@
         <i class="bx bx-menu bx-lg"></i>
       </div>
     </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light visibilidad2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary visibility2">
       <div class="container-fluid">
         <button
           class="navbar-toggler"
@@ -64,55 +64,37 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="d-flex visibility2">
+          <input
+            class="form-control me-2 input-size"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            v-model="text_input"
+          />
+          <button class="btn btn-warning" @click="searchEmit">Buscar</button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <ul class="hidden-menu">
+            <hr />
+            <!-- navbar-nav -->
+            <li class="hidden-item">
+              <router-link :to="{ name: 'home' }">Inicio</router-link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+            <hr />
+            <li class="hidden-item">
+              <router-link :to="{ name: 'nuevo' }">Nuevo Anuncio</router-link>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
+            <hr />
+            <li class="hidden-item">
+              <router-link :to="{ name: 'home' }">Carrito</router-link>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Disabled</a
-              >
+            <hr />
+            <li class="hidden-item">
+              <router-link :to="{ name: 'home' }">Estadisticas</router-link>
             </li>
+            <hr />
           </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </div>
     </nav>
@@ -168,7 +150,30 @@ const searchEmit = () => {
 
 <style scoped>
 /* Estilos para navbar movil */
-.visibilidad2 {
+
+.hidden-menu {
+  width: 100%;
+  padding: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.hidden-item {
+  width: 100%;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.hidden-item a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input-size {
+  width: 450px;
+}
+
+.visibility2 {
   display: none;
 }
 .m-l {
@@ -251,9 +256,18 @@ header {
 .left-container a {
   display: flex;
   align-items: center;
+  text-decoration: none;
   font-size: 1.5rem;
   font-weight: 800;
   cursor: pointer;
+}
+
+.interaction-container a:nth-child(2):hover {
+  color: var(--text-color);
+}
+
+.left-container a:hover {
+  color: var(--text-color);
 }
 
 .left-container ion-icon {
@@ -338,6 +352,10 @@ header {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .input-size {
+    width: 550px;
+  }
+
   .side-menu-container {
     width: var(--width-sidenav-md);
     font-size: 1.5rem;
@@ -362,12 +380,16 @@ header {
   .visibility {
     display: none;
   }
-  .visibilidad2 {
+  .visibility2 {
     display: block;
   }
 }
 
 @media (max-width: 767px) {
+  .input-size {
+    width: 300px;
+  }
+
   .visibility {
     display: none;
   }
@@ -414,11 +436,15 @@ header {
     width: 20%;
   }
 
-  .visibilidad2 {
+  .visibility2 {
     display: block;
   }
 
-  @media (max-width: 341px) {
+  @media (max-width: 414px) {
+    .input-size {
+      width: 190px;
+    }
+
     .left-container span {
       font-size: 1.2rem;
     }
