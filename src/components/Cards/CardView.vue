@@ -10,7 +10,12 @@
         >
       </div>
       <div class="cardA-descripcion">
-        <span>${{ props.object.descripcion }}</span>
+        <span
+          >{{ props.object.telefono.marca }} {{ props.object.telefono.modelo }},
+          pantalla de {{ props.object.telefono.pantalla }},
+          {{ props.object.telefono.rom }} GB, {{ props.object.telefono.ram }} GB
+          de RAM, sistema operativo {{ props.object.telefono.sistema }}</span
+        >
       </div>
     </div>
   </div>

@@ -60,8 +60,6 @@ onBeforeMount(async () => {
     imagenes.value.push(await getDownloadURL(itemRef));
   }
 
-  console.log(imagenes.value);
-
   const docRef = doc(db, "anuncios", id_anuncio);
   const docSnap = await getDoc(docRef);
 

@@ -129,7 +129,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="6.0"
               name="6.0"
               id=""
@@ -139,7 +139,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="5.5"
               name="5.5"
               id=""
@@ -149,7 +149,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="5.0"
               name="5.0"
               id=""
@@ -204,8 +204,6 @@ const sendEmit = () => {
 .toggle-button {
   padding-top: 15px;
   width: 100%;
-  position: fixed;
-  z-index: 102;
   background: var(--main-color);
 }
 

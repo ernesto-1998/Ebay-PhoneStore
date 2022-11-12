@@ -111,7 +111,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="6.0"
               name="6.0"
               id=""
@@ -121,7 +121,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="5.5"
               name="5.5"
               id=""
@@ -131,7 +131,7 @@
           <div class="cardA-item">
             <input
               type="checkbox"
-              v-model="sistemas"
+              v-model="pantallas"
               value="5.0"
               name="5.0"
               id=""

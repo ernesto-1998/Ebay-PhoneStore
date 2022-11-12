@@ -10,7 +10,8 @@ export const useInputStore = defineStore({
         sistemas: [],
         pantallas: [],
         estado: null,
-        precio: null
+        precio: null,
+        fecha: null,
     }),
     actions: {
         asignarText(data) {
@@ -36,6 +37,9 @@ export const useInputStore = defineStore({
         },
         asignarPrecio(data){
             this.precio = data;
+        },
+        asignarFecha(data){
+            this.fecha = data;
         }
     }
 })

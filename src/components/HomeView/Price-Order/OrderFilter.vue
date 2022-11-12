@@ -1,7 +1,7 @@
 <template>
   <div class="order-container">
     <div class="order-title">
-      <span>Ordenar anuncios por: </span>
+      <span>Ordenar por: </span>
     </div>
     <div class="order-content">
       <a class="btnA btnGeneralA a-link" @click="ordenarPrecio"
@@ -15,7 +15,7 @@
         ></ion-icon
         >Precio</a
       >
-      <a class="btnA btnGeneralA2">Fecha</a>
+      <a class="btnA btnGeneralA2" @click="ordenarFecha">Fecha</a>
     </div>
   </div>
 </template>
@@ -25,11 +25,17 @@ import { ref, onUpdated } from "vue";
 import { useInputStore } from "../../../stores/input";
 
 let precio = ref(false);
+let fecha = ref(false);
 let input = useInputStore();
 
 const ordenarPrecio = () => {
   precio.value = !precio.value;
   input.asignarPrecio(precio.value);
+};
+
+const ordenarFecha = () => {
+  fecha.value = !fecha.value;
+  input.asignarFecha(fecha.value);
 };
 </script>
 

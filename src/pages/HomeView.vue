@@ -236,6 +236,26 @@ const filtrarAnuncios = () => {
     }
   }
 
+  // Filtrar por pantalla
+
+  if (input.pantallas.length > 0) {
+    input.pantallas.forEach((x) => {
+      if (x === 6.0) {
+        anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
+          return t.telefono.pantalla > 6;
+        });
+      } else if (x < 6.0 && x > 5.0) {
+        anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
+          return t.telefono.pantalla < 6.0 && t.telefono.pantalla > 5.0;
+        });
+      } else if (x <= 5.0) {
+        anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
+          return t.telefono.pantalla <= 5.0;
+        });
+      }
+    });
+  }
+
   //Filtrar precio
 
   if (input.precio === false) {
@@ -255,6 +275,31 @@ const filtrarAnuncios = () => {
         return 1;
       }
       if (p2.precio < p1.precio) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  //Filtrar precio
+
+  if (input.fecha === false) {
+    anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
+      if (p1.fecha > p2.fecha) {
+        // this.filtrarFecha = null;
+        return 1;
+      }
+      if (p1.fecha < p2.fecha) {
+        return -1;
+      }
+      return 0;
+    });
+  } else if (input.fecha === true) {
+    anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
+      if (p2.fecha > p1.fecha) {
+        return 1;
+      }
+      if (p2.fecha < p1.fecha) {
         return -1;
       }
       return 0;
