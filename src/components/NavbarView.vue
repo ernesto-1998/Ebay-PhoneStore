@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <nav class="container navigation">
+    <nav class="container navigation visibility">
       <div class="left-container">
         <router-link :to="{ name: 'home' }">
           <ion-icon name="megaphone-outline"></ion-icon>
@@ -285,9 +285,16 @@ header {
   .input-content input:focus {
     width: 360px;
   }
+
+  .visibility {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
+  .visibility {
+    display: none;
+  }
   .left-container {
     font-size: 1.2rem;
     font-weight: 800;
