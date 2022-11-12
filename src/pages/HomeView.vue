@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="big-container">
     <div v-if="load" class="container-space main-container">
       <div class="left-grid-container">
         <SideCard />
@@ -8,6 +8,20 @@
         <div class="price-order-container">
           <Price class="visibility" />
           <Order />
+          <div class="funel-icon visibility2" @click="isActive = !isActive">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-funnel-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"
+              />
+            </svg>
+          </div>
         </div>
         <div class="anuncios-container">
           <div class="anuncios-content">
@@ -37,6 +51,9 @@
           </div>
         </div>
       </div>
+      <div class="side-menu-container" :class="{ toggle_back: isActive }">
+        <SideNav @change-state="change" />
+      </div>
     </div>
     <div v-if="!load" class="load-gif">
       <img src="../assets/beer.gif" alt="" />
@@ -48,6 +65,7 @@
 import { ref, onMounted, watch, onBeforeMount } from "vue";
 import { useInputStore } from "../stores/input";
 import CardView from "../components/Cards/CardView.vue";
+import SideNav from "../components/SideNav.vue";
 import SideCard from "../components/HomeView/Home-SideCard/SideCard.vue";
 import Price from "../components/HomeView/Price-Order/PriceFilter.vue";
 import Order from "../components/HomeView/Price-Order/OrderFilter.vue";
@@ -56,6 +74,7 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref as reference } from "firebase/storage";
 
 let anuncios = [];
+let isActive = ref(false);
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
 let pagination = ref(8);
@@ -69,6 +88,10 @@ watch(input, () => {
 onBeforeMount(() => {
   callData();
 });
+
+const change = () => {
+  isActive.value = !isActive.value;
+};
 
 const callData = async () => {
   const querySnapshot = await getDocs(collection(db, "anuncios"));
@@ -257,6 +280,35 @@ const filtrarAnuncios = () => {
 </script>
 
 <style scoped>
+.big-container {
+  position: relative;
+}
+
+.side-menu-container {
+  width: var(--width-sidenav-sm);
+  background: var(--main-color);
+  height: 100%;
+  padding: 0 30px 15px 30px;
+  z-index: 101;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  font-size: 1rem;
+  transition: 200ms ease-in-out;
+}
+
+.toggle_back {
+  right: 0;
+}
+
+.funel-icon {
+  background-color: var(--main-color);
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
 .visibility {
   display: flex;
 }
@@ -308,6 +360,10 @@ const filtrarAnuncios = () => {
   cursor: pointer;
 }
 
+.visibility2 {
+  display: none;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .left-grid-container {
     /* width: var(--width-sidenav-md);  */
@@ -322,6 +378,10 @@ const filtrarAnuncios = () => {
   .anuncios-content {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.visibility2 {
+  display: none;
 }
 
 .anuncios-paginator {
@@ -343,11 +403,15 @@ const filtrarAnuncios = () => {
     display: none;
   }
   .price-order-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 70px;
   }
 
   .anuncios-content {
     grid-template-columns: 1fr;
+  }
+
+  .visibility2 {
+    display: flex;
   }
 }
 </style>

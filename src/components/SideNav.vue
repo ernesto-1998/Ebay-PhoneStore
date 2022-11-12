@@ -1,161 +1,187 @@
 <template>
-  <div class="toggle-button">
-    <!-- <ion-icon name="menu-outline" @click="sendEmit"></ion-icon> -->
-    <ion-icon name="chevron-forward-outline" @click="sendEmit"></ion-icon>
-  </div>
-  <div class="side-menu-content">
-    <div class="user-photo">
-      <div class="user-photo-content">
-        <img v-if="!control" src="../assets/blank-profile-picture-973460.svg" alt="" />
-        <img v-if="control" :src="usuario.photo" alt="" />
+  <div class="sidecard-container">
+    <div class="toggle-button">
+      <!-- <ion-icon name="menu-outline" @click="sendEmit"></ion-icon> -->
+      <ion-icon name="chevron-forward-outline" @click="sendEmit"></ion-icon>
+      <div class="funel-icon" @click="sendEmit">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-funnel-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"
+          />
+        </svg>
       </div>
     </div>
-    <div class="user-name">
-      <span align="center" v-if="existe">{{ usuario.nombre }}</span>
-      <span v-if="!existe"> No Registrado </span>
+    <div class="cardA-container">
+      <div class="sidecard-switch">
+        <span>Nuevo</span>
+        <input @click="asignarEstado" type="checkbox" value="true" />
+      </div>
+      <hr />
+      <div class="cardA">
+        <div class="cardA-title">
+          <span>Marca</span>
+        </div>
+        <hr />
+        <div class="cardA-body">
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="samsung"
+              name="samsung"
+              id=""
+            />
+            <span>Samsung</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="huawei"
+              name="huawei"
+              id=""
+            />
+            <span>Huawei</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="nokia"
+              name="nokia"
+              id=""
+            />
+            <span>Nokia</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="iphone"
+              name="iphone"
+              id=""
+            />
+            <span>Iphone</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="marcas"
+              value="xiaomi"
+              name="xiaomi"
+              id=""
+            />
+            <span>Xiaomi</span>
+          </div>
+        </div>
+      </div>
+      <div class="cardA">
+        <div class="cardA-title">
+          <span>Sistema Operativo</span>
+        </div>
+        <hr />
+        <div class="cardA-body">
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="android"
+              name="android"
+              id=""
+            />
+            <span>Android</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="windows"
+              name="windows"
+              id=""
+            />
+            <span>Windows</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="ios"
+              name="ios"
+              id=""
+            />
+            <span>Ios</span>
+          </div>
+        </div>
+      </div>
+      <div class="cardA">
+        <div class="cardA-title">
+          <span>Pantalla</span>
+        </div>
+        <hr />
+        <div class="cardA-body">
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="6.0"
+              name="6.0"
+              id=""
+            />
+            <span>6.0</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="5.5"
+              name="5.5"
+              id=""
+            />
+            <span>5.5</span>
+          </div>
+          <div class="cardA-item">
+            <input
+              type="checkbox"
+              v-model="sistemas"
+              value="5.0"
+              name="5.0"
+              id=""
+            />
+            <span>5</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <hr />
-
-    <div v-if="!existe" class="iniciar-sesion">
-      <a class="btn btnGeneral" @click="googleAutenticar"
-        ><span align="center">Iniciar Sesión</span></a
-      >
-    </div>
-
-    <ul class="side-menu-options" v-if="existe">
-      <router-link :to="{ name: 'perfil', params: { id: usuario.id }}"
-        ><li class="options-items">Mi Perfil</li></router-link
-      >
-      <router-link :to="{ name: 'nuevo', params: { id: usuario.id }}"
-        ><li class="options-items">Nuevo Anuncio</li></router-link
-      >
-      <router-link :to="{ name: 'anuncios', params: { id: usuario.id }}"
-        ><li class="options-items">Mis Anuncios</li></router-link
-      >
-      <!-- <router-link :to="{ name: 'nuevo' }"
-        ><li class="options-items">Estadisticas</li></router-link
-      >  -->
-      <li class="options-items-last"><a @click="cerrarSesion" class="btn btnGeneral2">Cerrar Sesión</a></li>
-    </ul>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import {
-  getAdditionalUserInfo,
-  signOut,
-  onAuthStateChanged,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db, auth, st } from "../firebase";
-import router from "../router/index";
-import { getDownloadURL, ref as reference, list } from "firebase/storage";
+import { ref, onUpdated } from "vue";
+import { useInputStore } from "../stores/input";
 
-let usuario = ref({});
-let control = ref(false);
-let existe = ref(false);
-// const storageRef = reference(st, 'usuarios' + '/' + id_usuario + '/' + 'perfil');
+let marcas = ref([]);
+let sistemas = ref([]);
+let pantallas = ref([]);
+let estado = false;
+const input = useInputStore();
 
-onMounted(() => {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      usuario.value.id = user.uid;
-      existe.value = true;
-      const storageRef = reference(st, 'usuarios' + '/' + user.uid + '/' + 'perfil');
-      const storageRefList = reference(st, 'usuarios' + '/' + user.uid);
-      const lista = await list(storageRefList);
-        if(lista.items.length !== 0) {
-          await getDownloadURL(reference(st, storageRef)).then((url) => {
-            usuario.value.photo = url;
-            control.value = true;
-          });
-        }else {
-          control.value = false;
-        }
-
-      const docRef = doc(db, "usuarios", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        usuario.value.nombre = docSnap.data().nombre;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    }
-  });
+onUpdated(() => {
+  input.asignarMarcas(marcas.value);
+  input.asignarSistemas(sistemas.value);
+  input.asignarPantallas(pantallas.value);
 });
 
-const googleAutenticar = () => {
-  const provider = new GoogleAuthProvider();
-  
-  auth.languageCode = "es";
-  signInWithPopup(auth, provider)
-    .then(async (result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      
-      const token = credential.accessToken;
-
-      // The signed-in user info.
-      // const user = result.user;
-
-      const docRef = doc(db, "usuarios", result.user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if(!docSnap.exists()) {
-        await setDoc(doc(db, "usuarios", result.user.uid), {
-          id_usuario: result.user.uid,
-          nombre: result.user.displayName,
-          email: result.user.email,
-        });
-
-        llenarUsuario(result.user.uid);
-        console.log("Es un nuevo usuario")
-      }
-
-    //   router.push({ name: "home" });
-      
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
-    });
+const asignarEstado = () => {
+  estado = !estado;
+  input.asignarEstado(estado);
 };
-
-const cerrarSesion = () => {
-  signOut(auth).then(() => {
-    // control.value = false;
-    router.go();
-  });
-};
-
-const llenarUsuario = async (id_usuario) => {
-
-      const docRef = doc(db, "usuarios", id_usuario);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        usuario.value.photo = docSnap.data().foto;
-        usuario.value.nombre = docSnap.data().nombre;
-        usuario.value.id = docSnap.data().id_usuario;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    
-
-}
 
 const emit = defineEmits(["changeState"]);
 
@@ -165,6 +191,15 @@ const sendEmit = () => {
 </script>
 
 <style scoped>
+.funel-icon {
+  background-color: var(--main-color);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
 
 .toggle-button {
   padding-top: 15px;
@@ -174,79 +209,60 @@ const sendEmit = () => {
   background: var(--main-color);
 }
 
-.side-menu-content {
-  padding: 20px;
-  padding-top: 60px;
-  height: 100vh;
-  overflow: auto;
+.sidecard-container {
+  height: 100%;
 }
 
-.toggle-button ion-icon {
-  cursor: pointer;
-  font-size: 1.9rem;
+.cardA-container {
+  background: var(--main-color);
+  padding-top: 20px;
 }
 
-.user-photo {
+.sidecard-switch {
   display: flex;
+  align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
-.user-photo-content {
-  width: 100%;
-  overflow: hidden;
-}
-
-.user-photo-content img {
-  object-fit: cover;
-}
-
-.user-name {
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.iniciar-sesion {
-  display: flex;
-  justify-content: center;
-  padding-top: 15px;
-}
-
-.btnIniciar {
-  padding: 5px 20px;
-  background: var(--second-color);
+.sidecard-switch span {
   color: var(--text-color);
-  cursor: pointer;
+  font-size: 1.2rem;
 }
 
-.btnIniciar:hover {
-  background: var(--text-color);
-  color: var(--main-color);
+.sidecard-switch input {
+  margin-left: 10px;
 }
 
-.side-menu-options .options-items {
+.cardA {
+  padding: 8px 40px 15px;
+  background-color: var(--main-color);
+}
+
+.cardA-title {
   display: flex;
   justify-content: center;
-  padding: 10px 0;
-  transition: 250ms ease-in-out;
-}
-
-.options-items-last {
-  display: flex;
-  justify-content: center;
-  margin-top: 120px;
-  
-}
-
-.options-items:hover {
-  background: var(--second-color);
+  margin-bottom: 10px;
   color: var(--text-color);
-  cursor: pointer;
+  font-size: 1.2rem;
 }
 
-/* @media(max-width: 767px) {
-  .user-photo-content {
-    width: 75%;
-  }
-} */
+.cardA-body {
+  margin-top: 10px;
+}
+
+.cardA:last-child .cardA-body {
+  margin-bottom: 10px;
+}
+
+.cardA-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: var(--text-color);
+}
+
+.cardA-item span {
+  margin-left: 10px;
+}
 </style>
