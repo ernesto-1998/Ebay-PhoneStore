@@ -42,9 +42,20 @@
           ><ion-icon name="cart-outline"></ion-icon
         ></router-link>
       </div>
-      <!-- <div class="side-menu-container" :class="{toggle_back: isActive}">
-        <SideNav @change-state="change"/>
+      <!-- <div class="side-menu-container" :class="{ toggle_back: isActive }">
+        <SideNav @change-state="change" />
       </div> -->
+    </nav>
+    <nav class="movil-container visibilidad2">
+      <div class="burguer-icon">
+        <i class="bx bx-menu bx-lg"></i>
+      </div>
+      <ul class="hide-menu">
+        <li class="hide-menu_item">1</li>
+        <li class="hide-menu_item">2</li>
+        <li class="hide-menu_item">3</li>
+        <li class="hide-menu_item">4</li>
+      </ul>
     </nav>
   </header>
 </template>
@@ -60,7 +71,6 @@ import { getDownloadURL, ref as reference, list } from "firebase/storage";
 
 let text_input = ref("");
 let isActive = ref(false);
-let user_photo = ref({});
 const input = useInputStore();
 
 onMounted(() => {
@@ -98,6 +108,23 @@ const searchEmit = () => {
 </script>
 
 <style scoped>
+/* Estilos para navbar movil */
+
+.movil-container {
+  position: fixed;
+  width: 100%;
+}
+
+.hide-menu {
+  position: absolute;
+  width: 100%;
+  top: -100px;
+  background-color: var(--main-color);
+}
+
+.visibilidad2 {
+  display: none;
+}
 .m-l {
   margin-left: 1rem;
 }
@@ -289,6 +316,9 @@ header {
   .visibility {
     display: none;
   }
+  .visibilidad2 {
+    display: block;
+  }
 }
 
 @media (max-width: 767px) {
@@ -338,6 +368,10 @@ header {
     width: 20%;
   }
 
+  .visibilidad2 {
+    display: block;
+  }
+
   @media (max-width: 341px) {
     .left-container span {
       font-size: 1.2rem;
@@ -349,6 +383,10 @@ header {
 
     .input-content input:focus {
       width: 125px;
+    }
+
+    .visibilidad2 {
+      display: block;
     }
   }
 }
