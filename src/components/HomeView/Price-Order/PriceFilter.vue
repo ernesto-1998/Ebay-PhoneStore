@@ -3,6 +3,7 @@
     <div class="price-content">
       <span>Desde:</span>
       <div class="input-container">
+        <i class="bi bi-currency-dollar"></i>
         <i class="bi bi-x" v-if="desde !== ''" @click="limpiarDesde"></i>
         <input
           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
@@ -14,6 +15,7 @@
     <div class="price-content">
       <span>Hasta:</span>
       <div class="input-container">
+        <i class="bi bi-currency-dollar"></i>
         <i class="bi bi-x" v-if="hasta !== ''" @click="limpiarHasta"></i>
         <input
           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
@@ -70,7 +72,15 @@ const asignarH = () => {
   position: relative;
 }
 
-.input-container i {
+.input-container i:nth-child(1) {
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  top: 20%;
+  left: 0;
+}
+
+.input-container i:nth-child(2) {
   position: absolute;
   font-size: 1.5rem;
   color: var(--text-color);
@@ -81,7 +91,7 @@ const asignarH = () => {
 .price-content input {
   margin-top: 10px;
   width: 100px;
-  padding: 0 25px 0px 10px;
+  padding: 0 25px 0px 25px;
   border: none;
   outline: none;
   background: none;
