@@ -3,27 +3,23 @@
     <nav class="container-space navigation visibility">
       <div class="left-container">
         <router-link :to="{ name: 'home' }">
-          <ion-icon name="megaphone-outline"></ion-icon>
+          <i class="bi bi-megaphone-fill"></i>
           <span>Tienda Cellphone</span>
         </router-link>
       </div>
       <div class="input-container">
         <div class="input-content">
-          <ion-icon name="search-outline"></ion-icon>
-          <ion-icon
-            v-if="text_input !== ''"
-            @click="limpiarInput"
-            name="close-circle-outline"
-          ></ion-icon>
+          <i class="bi bi-search"></i>
+          <i class="bi bi-x" v-if="text_input !== ''" @click="limpiarInput"></i>
           <input
             type="text"
             placeholder="Ingresa una marca de telefono"
             v-model="text_input"
           />
         </div>
-        <div class="search-button" @click="searchEmit">
+        <!-- <div class="search-button" @click="searchEmit">
           <ion-icon name="search-circle-outline"></ion-icon>
-        </div>
+        </div> -->
       </div>
       <div class="buttons-container">
         <router-link :to="{ name: 'home' }" class="btnA btnGeneralA m-l"
@@ -36,10 +32,10 @@
       <div class="interaction-container">
         <router-link class="icon-interactive" :to="{ name: 'nuevo' }"
           ><div class="icon-cont background icon-border">
-            <ion-icon name="add-outline"></ion-icon></div
+            <i class="bx bx-plus-medical"></i></div
         ></router-link>
         <router-link class="icon-interactive" :to="{ name: 'nuevo' }"
-          ><ion-icon name="cart-outline"></ion-icon
+          ><i class="bi bi-cart-fill"></i
         ></router-link>
       </div>
       <!-- <div class="side-menu-container" :class="{ toggle_back: isActive }">
@@ -184,13 +180,17 @@ const searchEmit = () => {
   margin-left: 1rem;
 }
 
-.icon-interactive ion-icon {
+.icon-interactive i {
   font-size: 2.2rem;
 }
 
 .interaction-container {
   display: flex;
   align-items: center;
+}
+
+.icon-cont {
+  padding: 0.3rem;
 }
 
 .icon-border {
@@ -239,7 +239,7 @@ header {
   height: 100%;
 }
 
-.toggle-button ion-icon {
+.toggle-button i {
   cursor: pointer;
   font-size: 1.9rem;
 }
@@ -270,7 +270,7 @@ header {
   color: var(--text-color);
 }
 
-.left-container ion-icon {
+.left-container i {
   margin-right: 10px;
   font-size: 2.2rem;
 }
@@ -303,7 +303,7 @@ header {
 
 .input-content input:focus {
   background: var(--second-color);
-  width: 480px;
+  width: 440px;
 }
 
 .input-content input::placeholder {
@@ -311,18 +311,18 @@ header {
   opacity: 1;
 }
 
-.input-content ion-icon:nth-child(1) {
-  font-size: 1.7rem;
+.input-content i:nth-child(1) {
+  font-size: 1.2rem;
   position: absolute;
-  top: 6%;
-  left: 0;
+  top: 4%;
+  left: 1%;
   color: var(--text-color);
 }
 
-.input-content ion-icon:nth-child(2) {
+.input-content i:nth-child(2) {
   font-size: 1.7rem;
   position: absolute;
-  top: 6%;
+  top: 0;
   right: 0%;
   color: var(--text-color);
 }
@@ -337,7 +337,7 @@ header {
   cursor: pointer;
 }
 
-.search-button ion-icon {
+.search-button i {
   font-size: 1.7rem;
 }
 
@@ -407,7 +407,7 @@ header {
     font-size: 1.5rem;
   }
 
-  .left-container ion-icon {
+  .left-container i {
     display: none;
   }
 

@@ -223,12 +223,6 @@
                     </tr>
                     <!-- </tbody> -->
                   </table>
-                  <b-spinner
-                    v-if="visible === false"
-                    style="width: 5rem; height: 5rem"
-                    class="ms-md-10 mt-md-3"
-                    variant="primary"
-                  ></b-spinner>
                 </div>
               </div>
               <div class="img-table visibilidad">
@@ -262,12 +256,6 @@
                     </tr>
                     <!-- </tbody> -->
                   </table>
-                  <b-spinner
-                    v-if="visible === false"
-                    style="width: 5rem; height: 5rem"
-                    class="ms-md-10 mt-md-3"
-                    variant="primary"
-                  ></b-spinner>
                 </div>
               </div>
 

@@ -5,17 +5,15 @@
     </div>
     <div class="order-content">
       <a class="btnA btnGeneralA a-link" @click="ordenarPrecio"
-        ><ion-icon
-          v-if="precio === false"
-          name="arrow-down-circle-outline"
-        ></ion-icon
-        ><ion-icon
-          v-if="precio === true"
-          name="arrow-up-circle-outline"
-        ></ion-icon
-        >Precio</a
+        ><i class="bi bi-arrow-down" v-if="precio === false"></i>
+        <i class="bi bi-arrow-up" v-if="precio === true"></i>
+        Precio</a
       >
-      <a class="btnA btnGeneralA2" @click="ordenarFecha">Fecha</a>
+      <a class="btnA btnGeneralA2" @click="ordenarFecha">
+        <i class="bi bi-arrow-down" v-if="fecha === false"></i>
+        <i class="bi bi-arrow-up" v-if="fecha === true"></i>
+        Fecha</a
+      >
     </div>
   </div>
 </template>
@@ -65,8 +63,8 @@ const ordenarFecha = () => {
   justify-content: space-evenly;
 }
 
-ion-icon {
+i {
   margin-right: 5px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 </style>
