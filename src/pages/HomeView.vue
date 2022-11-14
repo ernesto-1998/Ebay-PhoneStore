@@ -40,7 +40,8 @@
             <div class="q-pa-lg flex flex-center">
               <q-pagination
                 v-model="current"
-                :max="7"
+                @click="cambiarPagina(current - 1)"
+                :max="anunciosFiltradosPaginados.length"
                 direction-links
                 boundary-links
                 icon-first="skip_previous"
@@ -89,7 +90,7 @@ let anuncios = [];
 let isActive = ref(false);
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
-let pagination = ref(8);
+let pagination = ref(2);
 let current = ref(1);
 let load = ref(false);
 const input = useInputStore();
@@ -339,7 +340,7 @@ const filtrarAnuncios = () => {
     pagination2 += pagination2;
     counter++;
   }
-  anunciosFiltrados.value = anunciosFiltradosPaginados.value[0];
+  anunciosFiltrados.value = anunciosFiltradosPaginados.value[current.value];
 };
 </script>
 
