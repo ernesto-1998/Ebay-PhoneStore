@@ -37,7 +37,19 @@
             </div>
           </div>
           <div class="anuncios-paginator">
-            <ul class="paginator-container">
+            <div class="q-pa-lg flex flex-center">
+              <q-pagination
+                v-model="current"
+                :max="7"
+                direction-links
+                boundary-links
+                icon-first="skip_previous"
+                icon-last="skip_next"
+                icon-prev="fast_rewind"
+                icon-next="fast_forward"
+              />
+            </div>
+            <!-- <ul class="paginator-container">
               <li
                 class="paginator-content"
                 @click="cambiarPagina(index)"
@@ -46,7 +58,7 @@
               >
                 <span>{{ (numero = index + 1) }}</span>
               </li>
-            </ul>
+            </ul> -->
             <div class="perPage-container"></div>
           </div>
         </div>
@@ -78,6 +90,7 @@ let isActive = ref(false);
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
 let pagination = ref(8);
+let current = ref(1);
 let load = ref(false);
 const input = useInputStore();
 
