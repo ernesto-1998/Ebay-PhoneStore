@@ -27,7 +27,9 @@
           <div class="anuncios-content">
             <div
               class="anuncios-cards"
-              v-for="(anuncio, index) in anunciosFiltrados"
+              v-for="(anuncio, index) in anunciosFiltradosPaginados[
+                current - 1
+              ]"
               :key="index"
             >
               <router-link
@@ -40,7 +42,6 @@
             <div class="q-pa-lg flex flex-center">
               <q-pagination
                 v-model="current"
-                @click="cambiarPagina(current - 1)"
                 :max="anunciosFiltradosPaginados.length"
                 direction-links
                 boundary-links
@@ -97,6 +98,10 @@ const input = useInputStore();
 
 watch(input, () => {
   filtrarAnuncios();
+});
+
+watch(current, () => {
+  console.log(current.value);
 });
 
 onBeforeMount(() => {
@@ -327,21 +332,25 @@ const filtrarAnuncios = () => {
   }
 
   let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
-
+  console.log("total", total);
   let counter = 0;
   let pagination2 = pagination.value;
   let pagStart = 0;
   anunciosFiltradosPaginados.value.length = 0;
   while (counter < total) {
     anunciosFiltradosPaginados.value.push(
-      anunciosFiltrados.value.slice(pagStart, pagination2)
+      anunciosFiltrados.value.slice(
+        pagStart,
+        pagination2 === anunciosFiltrados.value.length
+      )
     );
     pagStart += pagination2;
     pagination2 += pagination2;
     counter++;
   }
-  anunciosFiltrados.value = anunciosFiltradosPaginados.value[current.value];
+  // anunciosFiltradosPaginados.value;
 };
+console.log(anunciosFiltradosPaginados.value);
 </script>
 
 <style scoped>
