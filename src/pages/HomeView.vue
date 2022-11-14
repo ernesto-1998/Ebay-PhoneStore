@@ -261,6 +261,7 @@ const filtrarAnuncios = () => {
   //Filtrar precio
 
   if (input.precio === false) {
+    input.fecha = null;
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
       if (p1.precio > p2.precio) {
         // this.filtrarFecha = null;
@@ -271,7 +272,8 @@ const filtrarAnuncios = () => {
       }
       return 0;
     });
-  } else if (input.precio === true) {
+  }
+  if (input.precio === true) {
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
       if (p2.precio > p1.precio) {
         return 1;
@@ -283,9 +285,10 @@ const filtrarAnuncios = () => {
     });
   }
 
-  //Filtrar precio
+  //Filtrar fecha
 
   if (input.fecha === false) {
+    input.precio = null;
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
       if (p1.fecha > p2.fecha) {
         // this.filtrarFecha = null;
@@ -296,7 +299,8 @@ const filtrarAnuncios = () => {
       }
       return 0;
     });
-  } else if (input.fecha === true) {
+  }
+  if (input.fecha === true) {
     anunciosFiltrados.value = anunciosFiltrados.value.sort((p1, p2) => {
       if (p2.fecha > p1.fecha) {
         return 1;
