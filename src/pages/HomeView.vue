@@ -240,15 +240,17 @@ const filtrarAnuncios = () => {
 
   if (input.pantallas.length > 0) {
     input.pantallas.forEach((x) => {
-      if (x === 6.0) {
+      if (x === "6.0") {
         anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
           return t.telefono.pantalla > 6;
         });
-      } else if (x < 6.0 && x > 5.0) {
+      }
+      if (x === "5.5") {
         anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
           return t.telefono.pantalla < 6.0 && t.telefono.pantalla > 5.0;
         });
-      } else if (x <= 5.0) {
+      }
+      if (x === "5.0") {
         anunciosFiltrados.value = anunciosFiltrados.value.filter((t) => {
           return t.telefono.pantalla <= 5.0;
         });
