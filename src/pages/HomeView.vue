@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, onBeforeMount } from "vue";
+import { ref, onMounted, watch, onBeforeMount, onUnmounted } from "vue";
 import { useInputStore } from "../stores/input";
 import CardView from "../components/Cards/CardView.vue";
 import SideNav from "../components/SideNav.vue";
