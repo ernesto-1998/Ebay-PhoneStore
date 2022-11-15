@@ -180,6 +180,8 @@ const searchEmit = () => {
 .interaction-container {
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  margin-left: 1rem;
 }
 
 .icon-cont {
@@ -277,6 +279,7 @@ header {
   display: flex;
   align-items: center;
   position: relative;
+  margin-left: 4rem;
 }
 
 .input-content {
@@ -287,7 +290,7 @@ header {
 }
 
 .input-content input {
-  width: 430px;
+  width: 530px;
   outline: none;
   padding: 0 33px;
   height: 100%;
@@ -300,7 +303,7 @@ header {
 
 .input-content input:focus {
   background: var(--second-color);
-  width: 440px;
+  width: 545px;
 }
 
 .input-content input::placeholder {
@@ -336,6 +339,10 @@ header {
 
 .search-button i {
   font-size: 1.7rem;
+}
+
+.buttons-container {
+  margin-left: 1.8rem;
 }
 
 .background {
