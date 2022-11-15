@@ -157,10 +157,10 @@
           </div>
           <div class="buttons-container">
             <div class="buttons-content">
-              <a class="btnA btnGeneralA" @click="guardarAnuncio">Enviar</a>
               <router-link :to="{ name: 'home' }" class="btnA btnGeneralA2"
                 >Cancelar</router-link
               >
+              <a class="btnA btnGeneralA" @click="guardarAnuncio">Crear</a>
             </div>
           </div>
         </div>

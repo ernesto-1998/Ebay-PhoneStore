@@ -495,7 +495,7 @@ console.log(anunciosFiltradosPaginados.value);
   }
 
   .anuncios-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .visibility2 {
