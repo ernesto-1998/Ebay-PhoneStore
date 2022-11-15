@@ -111,6 +111,10 @@ watch(anunciosPorPagina, () => {
   filtrarAnuncios();
 });
 
+onUnmounted(() => {
+  input.$reset();
+});
+
 onBeforeMount(() => {
   callData();
 });
