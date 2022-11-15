@@ -17,9 +17,6 @@
             v-model="text_input"
           />
         </div>
-        <!-- <div class="search-button" @click="searchEmit">
-          <ion-icon name="search-circle-outline"></ion-icon>
-        </div> -->
       </div>
       <div class="buttons-container">
         <router-link :to="{ name: 'home' }" class="btnA btnGeneralA m-l"
@@ -293,29 +290,28 @@ header {
   outline: none;
   padding: 0 33px;
   height: 100%;
-  background: none;
   border: none;
-  color: var(--text-color);
-  border-bottom: 2px solid var(--text-color);
+  border-radius: 16px;
+  /* border-bottom: 2px solid var(--text-color); */
   transition: all 0.4s ease;
 }
 
 .input-content input:focus {
-  background: var(--second-color);
+  /* background: var(--second-color); */
   width: 545px;
 }
 
-.input-content input::placeholder {
+/* .input-content input::placeholder {
   color: var(--text-color);
   opacity: 1;
-}
+} */
 
 .input-content i:nth-child(1) {
   font-size: 1.2rem;
   position: absolute;
   top: 4%;
   left: 1%;
-  color: var(--text-color);
+  color: #000;
 }
 
 .input-content i:nth-child(2) {
@@ -323,7 +319,7 @@ header {
   position: absolute;
   top: 0;
   right: 0%;
-  color: var(--text-color);
+  color: #000;
 }
 
 .search-button {
