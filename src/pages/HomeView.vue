@@ -27,9 +27,7 @@
           <div class="anuncios-content">
             <div
               class="anuncios-cards"
-              v-for="(anuncio, index) in anunciosFiltradosPaginados[
-                current - 1
-              ]"
+              v-for="(anuncio, index) in anunciosFiltradosPaginados"
               :key="index"
             >
               <router-link
@@ -42,7 +40,8 @@
             <div class="q-pa-lg flex flex-center">
               <q-pagination
                 v-model="current"
-                :max="anunciosFiltradosPaginados.length"
+                :max="numPaginas"
+                @click="cambioPagina"
                 direction-links
                 boundary-links
                 icon-first="skip_previous"
@@ -61,7 +60,13 @@
                 <span>{{ (numero = index + 1) }}</span>
               </li>
             </ul> -->
-            <div class="perPage-container"></div>
+            <div class="perPage-container">
+              <q-select
+                v-model="anunciosPorPagina"
+                :options="anunciosPorPaginaOptions"
+                label="Paginación"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -87,12 +92,14 @@ import { db, st } from "../firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref as reference } from "firebase/storage";
 
-let anuncios = [];
+let anuncios = ref([]);
 let isActive = ref(false);
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
-let pagination = ref(2);
+let anunciosPorPagina = ref(4);
+let anunciosPorPaginaOptions = ref([4, 8, 16]);
 let current = ref(1);
+let numPaginas = ref(0);
 let load = ref(false);
 const input = useInputStore();
 
@@ -100,8 +107,8 @@ watch(input, () => {
   filtrarAnuncios();
 });
 
-watch(current, () => {
-  console.log(current.value);
+watch(anunciosPorPagina, () => {
+  filtrarAnuncios();
 });
 
 onBeforeMount(() => {
@@ -115,7 +122,7 @@ const change = () => {
 const callData = async () => {
   const querySnapshot = await getDocs(collection(db, "anuncios"));
   for (let doc of querySnapshot.docs) {
-    anuncios.push({
+    anuncios.value.push({
       id_anuncio: doc.id,
       titulo: doc.data().titulo,
       nombre: doc.data().nombre,
@@ -139,12 +146,19 @@ const callData = async () => {
   load.value = true;
 };
 
-const cambiarPagina = (index) => {
-  anunciosFiltrados.value = anunciosFiltradosPaginados.value[index];
+// const cambiarPagina = (index) => {
+//   anunciosFiltrados.value = anunciosFiltradosPaginados.value[index];
+// };
+
+const cambioPagina = () => {
+  anunciosFiltradosPaginados.value = anunciosFiltrados.value.slice(
+    current.value * anunciosPorPagina.value - anunciosPorPagina.value,
+    current.value * anunciosPorPagina.value
+  );
 };
 
 const filtrarAnuncios = () => {
-  anunciosFiltrados.value = anuncios;
+  anunciosFiltrados.value = anuncios.value;
 
   // Filtro input navbar
 
@@ -331,23 +345,13 @@ const filtrarAnuncios = () => {
     });
   }
 
-  let total = Math.ceil(anunciosFiltrados.value.length / pagination.value);
-  console.log("total", total);
-  let counter = 0;
-  let pagination2 = pagination.value;
-  let pagStart = 0;
-  anunciosFiltradosPaginados.value.length = 0;
-  while (counter < total) {
-    anunciosFiltradosPaginados.value.push(
-      anunciosFiltrados.value.slice(
-        pagStart,
-        pagination2 === anunciosFiltrados.value.length
-      )
-    );
-    pagStart += pagination2;
-    pagination2 += pagination2;
-    counter++;
-  }
+  current.value = 1;
+  let total = anunciosFiltrados.value.length;
+  numPaginas.value = Math.ceil(total / anunciosPorPagina.value);
+  anunciosFiltradosPaginados.value = anunciosFiltrados.value.slice(
+    0,
+    anunciosPorPagina.value
+  );
   // anunciosFiltradosPaginados.value;
 };
 console.log(anunciosFiltradosPaginados.value);
@@ -413,10 +417,12 @@ console.log(anunciosFiltradosPaginados.value);
 /* Paginator */
 
 .anuncios-paginator {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  width: 100%;
 }
 
-.paginator-container {
+/* .paginator-container {
   display: flex;
 }
 
@@ -424,7 +430,7 @@ console.log(anunciosFiltradosPaginados.value);
   margin: 0 2px;
   padding: 3px 5px;
   background-color: var(--main-color);
-}
+} */
 
 .paginator-content span {
   color: var(--text-color);
@@ -432,6 +438,10 @@ console.log(anunciosFiltradosPaginados.value);
 
 .paginator-content:hover {
   cursor: pointer;
+}
+
+.perPage-container {
+  color: #000;
 }
 
 .visibility2 {
