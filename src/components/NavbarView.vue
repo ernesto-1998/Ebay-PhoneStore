@@ -61,7 +61,6 @@
             aria-label="Search"
             v-model="text_input"
           />
-          <button class="btn btn-warning" @click="searchEmit">Buscar</button>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="hidden-menu">
@@ -446,7 +445,7 @@ header {
 
   @media (max-width: 414px) {
     .input-size {
-      width: 190px;
+      width: 250px;
     }
 
     .left-container span {

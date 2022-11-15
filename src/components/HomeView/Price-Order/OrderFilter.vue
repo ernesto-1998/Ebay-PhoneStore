@@ -44,9 +44,13 @@ const ordenarFecha = () => {
 }
 
 .order-container {
+  display: flex;
   background: var(--main-color);
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
   height: 100%;
-  padding: 8px 0;
+  padding: 8px 10px;
 }
 
 .order-title {
@@ -60,7 +64,7 @@ const ordenarFecha = () => {
 .order-content {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 1rem;
 }
 
 i {

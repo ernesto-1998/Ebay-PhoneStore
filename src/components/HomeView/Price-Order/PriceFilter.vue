@@ -57,15 +57,17 @@ const asignarH = () => {
   display: flex;
   justify-content: center;
   height: 100%;
-  gap: 70px;
-  padding: 15px 0;
+  gap: 20px;
+  padding: 15px 25px;
   background: var(--main-color);
 }
 
 .price-content {
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .input-container {

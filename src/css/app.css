@@ -17,7 +17,7 @@
     --fourth-color: #9C2C77;
     --text-color: #fff;
 
-    --width-lg: 90%;
+    --width-lg: 97%;
     --width-md: 95%;
     --width-sm: 98%;
 
@@ -60,8 +60,8 @@ input[type=number] {
 }
 
 .container-space {
-    /* width: var(--width-lg); */
-    width: 98%;
+    width: var(--width-lg);
+
     margin: 0 auto;
 }
 

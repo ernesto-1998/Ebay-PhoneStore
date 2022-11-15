@@ -408,7 +408,8 @@ console.log(anunciosFiltradosPaginados.value);
 .price-order-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  /* gap: 125px; */
+  justify-items: center;
 }
 
 .anuncios-content {
