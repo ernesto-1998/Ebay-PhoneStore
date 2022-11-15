@@ -21,7 +21,7 @@
     <div class="cardA-container">
       <div class="sidecard-switch">
         <span>Nuevo</span>
-        <input @click="asignarEstado" type="checkbox" value="true" />
+        <q-toggle v-model="estado" color="warning" />
       </div>
       <hr />
       <div class="cardA">
@@ -163,13 +163,13 @@
 </template>
 
 <script setup>
-import { ref, onUpdated } from "vue";
+import { ref, onUpdated, watch } from "vue";
 import { useInputStore } from "../stores/input";
 
 let marcas = ref([]);
 let sistemas = ref([]);
 let pantallas = ref([]);
-let estado = false;
+let estado = ref(false);
 const input = useInputStore();
 
 onUpdated(() => {
@@ -178,10 +178,9 @@ onUpdated(() => {
   input.asignarPantallas(pantallas.value);
 });
 
-const asignarEstado = () => {
-  estado = !estado;
-  input.asignarEstado(estado);
-};
+watch(estado, () => {
+  input.asignarEstado(estado.value);
+});
 
 const emit = defineEmits(["changeState"]);
 
@@ -220,6 +219,7 @@ const sendEmit = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   margin-bottom: 10px;
 }
 
