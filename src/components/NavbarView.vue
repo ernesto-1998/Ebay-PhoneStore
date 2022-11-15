@@ -38,15 +38,8 @@
           ><i class="bi bi-cart-fill"></i
         ></router-link>
       </div>
-      <!-- <div class="side-menu-container" :class="{ toggle_back: isActive }">
-        <SideNav @change-state="change" />
-      </div> -->
     </nav>
-    <!-- <nav class="movil-container visibilidad2">
-      <div class="burguer-icon">
-        <i class="bx bx-menu bx-lg"></i>
-      </div>
-    </nav> -->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-primary visibility2">
       <div class="container-fluid">
         <button
@@ -261,6 +254,10 @@ header {
   font-weight: 800;
   cursor: pointer;
 }
+
+/* .interaction-container {
+  margin-right: 5rem;
+} */
 
 .interaction-container a:nth-child(2):hover {
   color: var(--text-color);
