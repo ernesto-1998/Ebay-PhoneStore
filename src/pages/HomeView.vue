@@ -364,6 +364,7 @@ console.log(anunciosFiltradosPaginados.value);
 <style scoped>
 .big-container {
   position: relative;
+  height: 100%;
 }
 
 .side-menu-container {
@@ -451,6 +452,10 @@ console.log(anunciosFiltradosPaginados.value);
 
 .visibility2 {
   display: none;
+}
+
+.load-gif {
+  height: 100vh;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
