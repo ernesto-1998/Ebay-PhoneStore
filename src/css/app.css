@@ -76,8 +76,14 @@ input[type=number] {
     border-radius: 16px;
 }
 
+.btnAIcon {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
 .btnGeneralA {
-    padding: 5px 20px;
+    /* padding: 5px 20px; */
     background: var(--second-color);
     color: var(--text-color);
     cursor: pointer;

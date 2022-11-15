@@ -50,22 +50,13 @@
                 icon-next="fast_forward"
               />
             </div>
-            <!-- <ul class="paginator-container">
-              <li
-                class="paginator-content"
-                @click="cambiarPagina(index)"
-                v-for="(number, index) in anunciosFiltradosPaginados"
-                :key="index"
-              >
-                <span>{{ (numero = index + 1) }}</span>
-              </li>
-            </ul> -->
             <div class="perPage-container">
-              <q-select
-                v-model="anunciosPorPagina"
-                :options="anunciosPorPaginaOptions"
-                label="Paginación"
-              />
+              <span>Articulos por página</span>
+              <select v-model="anunciosPorPagina" name="" id="">
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+              </select>
             </div>
           </div>
         </div>
@@ -424,7 +415,7 @@ console.log(anunciosFiltradosPaginados.value);
 
 .anuncios-paginator {
   display: grid;
-  grid-template-columns: 1fr 100px;
+  grid-template-columns: 1fr 200px;
   width: 100%;
 }
 
@@ -447,6 +438,10 @@ console.log(anunciosFiltradosPaginados.value);
 }
 
 .perPage-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   color: #000;
 }
 

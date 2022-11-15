@@ -157,10 +157,14 @@
           </div>
           <div class="buttons-container">
             <div class="buttons-content">
-              <router-link :to="{ name: 'home' }" class="btnA btnGeneralA2"
-                >Cancelar</router-link
+              <router-link
+                :to="{ name: 'home' }"
+                class="btnA btnAIcon btnGeneralA2"
+                ><i class="bx bxs-x-circle"></i>Cancelar</router-link
               >
-              <a class="btnA btnGeneralA" @click="guardarAnuncio">Crear</a>
+              <a class="btnA btnAIcon btnGeneralA" @click="guardarAnuncio"
+                ><i class="bx bxs-save"></i>Crear</a
+              >
             </div>
           </div>
         </div>
@@ -670,6 +674,7 @@ textarea {
 .second-line {
   margin-top: 25px;
   background: var(--main-color);
+  color: var(--text-color);
 }
 
 .third-cuadrant {
@@ -695,6 +700,7 @@ textarea {
   /* display: grid;
   grid-template-columns: 1fr 1fr 1fr; */
   padding: 15px 0;
+  color: var(--text-color);
 }
 
 .img-box {
@@ -710,6 +716,7 @@ textarea {
 .img-table {
   display: flex;
   justify-content: center;
+  color: var(--text-color);
 }
 
 .img-buttons {
