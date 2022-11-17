@@ -139,13 +139,41 @@ const callData = async () => {
       },
     });
   }
+  console.log(obtenerCantidades(anuncios.value));
   filtrarAnuncios();
   load.value = true;
 };
 
-// const cambiarPagina = (index) => {
-//   anunciosFiltrados.value = anunciosFiltradosPaginados.value[index];
-// };
+const obtenerCantidades = (anuncios) => {
+  let cantidades = {
+    nokia: 0,
+    samsung: 0,
+    huawei: 0,
+    xiaomi: 0,
+    iphone: 0,
+  };
+  anuncios.forEach((anuncio) => {
+    switch (anuncio.telefono.marca.toLowerCase().trim()) {
+      case "samsung":
+        cantidades["samsung"]++;
+        break;
+      case "nokia":
+        cantidades["nokia"]++;
+        break;
+      case "huawei":
+        cantidades["huawei"]++;
+        break;
+      case "iphone":
+        cantidades["iphone"]++;
+        break;
+      case "xiaomi":
+        cantidades["xiaomi"]++;
+        break;
+    }
+  });
+
+  return cantidades;
+};
 
 const cambioPagina = () => {
   anunciosFiltradosPaginados.value = anunciosFiltrados.value.slice(
