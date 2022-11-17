@@ -39,6 +39,9 @@
               id=""
             />
             <span>Samsung</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.samsung }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -49,6 +52,9 @@
               id=""
             />
             <span>Huawei</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.huawei }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -59,6 +65,9 @@
               id=""
             />
             <span>Nokia</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.nokia }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -69,6 +78,9 @@
               id=""
             />
             <span>Iphone</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.iphone }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -79,6 +91,9 @@
               id=""
             />
             <span>Xiaomi</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.xiaomi }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -97,6 +112,9 @@
               id=""
             />
             <span>Android</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.android }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -107,6 +125,9 @@
               id=""
             />
             <span>Windows</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.windows }}</span>
+            </div>
           </div>
           <div class="cardA-item">
             <input
@@ -117,6 +138,9 @@
               id=""
             />
             <span>Ios</span>
+            <div class="cardA-item_number">
+              <span>{{ props.cantidades.ios }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -171,6 +195,10 @@ let sistemas = ref([]);
 let pantallas = ref([]);
 let estado = ref(false);
 const input = useInputStore();
+
+const props = defineProps({
+  cantidades: Object,
+});
 
 onUpdated(() => {
   input.asignarMarcas(marcas.value);
@@ -257,10 +285,22 @@ const sendEmit = () => {
   display: flex;
   align-items: center;
   justify-content: start;
+  margin: 0.5rem 0;
   color: var(--text-color);
 }
 
 .cardA-item span {
   margin-left: 10px;
+}
+
+.cardA-item_number {
+  position: relative;
+}
+
+.cardA-item_number span {
+  position: absolute;
+  top: -17px;
+  right: -15px;
+  font-size: 1rem;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="big-container">
     <div v-if="load" class="container-space main-container">
       <div class="left-grid-container">
-        <SideCard />
+        <SideCard :cantidades="cantidades" />
       </div>
       <div class="right-grid-container">
         <div class="price-order-container">
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="side-menu-container" :class="{ toggle_back: isActive }">
-        <SideNav @change-state="change" />
+        <SideNav @change-state="change" :cantidades="cantidades" />
       </div>
     </div>
     <div v-if="!load" class="load-gif">
@@ -92,6 +92,7 @@ let anunciosFiltradosPaginados = ref([]);
 let anunciosPorPagina = ref(4);
 let anunciosPorPaginaOptions = ref([4, 8, 16]);
 let current = ref(1);
+let cantidades = ref({});
 let numPaginas = ref(0);
 let load = ref(false);
 const input = useInputStore();
@@ -139,7 +140,7 @@ const callData = async () => {
       },
     });
   }
-  console.log(obtenerCantidades(anuncios.value));
+  cantidades.value = obtenerCantidades(anuncios.value);
   filtrarAnuncios();
   load.value = true;
 };
@@ -151,6 +152,9 @@ const obtenerCantidades = (anuncios) => {
     huawei: 0,
     xiaomi: 0,
     iphone: 0,
+    android: 0,
+    ios: 0,
+    windows: 0,
   };
   anuncios.forEach((anuncio) => {
     switch (anuncio.telefono.marca.toLowerCase().trim()) {
@@ -168,6 +172,18 @@ const obtenerCantidades = (anuncios) => {
         break;
       case "xiaomi":
         cantidades["xiaomi"]++;
+        break;
+    }
+
+    switch (anuncio.telefono.sistema.toLowerCase().trim()) {
+      case "android":
+        cantidades["android"]++;
+        break;
+      case "windows":
+        cantidades["windows"]++;
+        break;
+      case "ios":
+        cantidades["ios"]++;
         break;
     }
   });
