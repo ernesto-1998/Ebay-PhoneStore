@@ -29,10 +29,6 @@
     --screen-sm: 768px;
 }
 
-body {
-    /* color: var(--text-color); */
-}
-
 hr {
     color: #000;
 }

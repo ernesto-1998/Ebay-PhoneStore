@@ -4,14 +4,12 @@
   <div class="container-app">
     <RouterView />
   </div>
-  <Footer />
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import NavbarView from "./components/NavbarView.vue";
 import HomeView from "./pages/HomeView.vue";
-import Footer from "./components/FooterView.vue";
 </script>
 
 <style>

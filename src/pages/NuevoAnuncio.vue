@@ -677,11 +677,6 @@ textarea {
   color: var(--text-color);
 }
 
-.third-cuadrant {
-  /* display: flex; */
-  /* justify-content: center; */
-}
-
 .title-content {
   display: flex;
   justify-content: center;

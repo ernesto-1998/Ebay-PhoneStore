@@ -50,7 +50,7 @@
                 icon-next="fast_forward"
               />
             </div>
-            <div class="perPage-container">
+            <div class="perPage-container visibility">
               <span>Articulos por página</span>
               <select v-model="anunciosPorPagina" name="" id="">
                 <option value="4">4</option>
@@ -68,6 +68,7 @@
     <div v-if="!load" class="load-gif">
       <img src="../assets/beer.gif" alt="" />
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -79,6 +80,7 @@ import SideNav from "../components/SideNav.vue";
 import SideCard from "../components/HomeView/Home-SideCard/SideCard.vue";
 import Price from "../components/HomeView/Price-Order/PriceFilter.vue";
 import Order from "../components/HomeView/Price-Order/OrderFilter.vue";
+import Footer from "../components/FooterView.vue";
 import { db, st } from "../firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { getDownloadURL, ref as reference } from "firebase/storage";
@@ -497,6 +499,10 @@ console.log(anunciosFiltradosPaginados.value);
 
   .anuncios-content {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .anuncios-paginator {
+    grid-template-columns: 1fr;
   }
 
   .visibility2 {

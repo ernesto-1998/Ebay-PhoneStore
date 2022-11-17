@@ -6,7 +6,7 @@
     <div class="info-precio">
       <span> $ {{ object.precio }}</span>
     </div>
-    <div class="info-button_comprar">
+    <div class="info-button_comprar visibilidad">
       <button class="btnA btnGeneralA">Comprar</button>
     </div>
     <div class="info-vendedor-telefono">
@@ -50,5 +50,8 @@ const props = defineProps({ object: Object });
 }
 
 @media (max-width: 767px) {
+  .visibilidad {
+    display: none;
+  }
 }
 </style>

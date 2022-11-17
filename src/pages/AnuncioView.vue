@@ -14,6 +14,16 @@
           {{ anuncio.descripcion }}
         </div>
       </div>
+      <div class="buttons-container">
+        <div class="buttons-content">
+          <router-link :to="{ name: 'home' }" class="button-item item1">
+            <span>Inicio</span>
+          </router-link>
+          <a class="button-item item2">
+            <span>Comprar</span>
+          </a>
+        </div>
+      </div>
     </div>
     <div v-if="!load" class="load-gif">
       <img src="../assets/beer.gif" alt="" />
@@ -111,6 +121,7 @@ onBeforeMount(async () => {
   margin: 20px 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 90px;
 }
 
 .anuncio-textarea {
@@ -136,6 +147,41 @@ onBeforeMount(async () => {
   .second-line {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .buttons-container {
+    width: 85%;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .buttons-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .button-item {
+    font-size: 2rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.7rem;
+  }
+
+  .item1 {
+    background-color: var(--second-color);
+  }
+
+  .item2 {
+    background-color: var(--main-color);
+  }
+
+  .buttons-content:nth-child(1) {
+    background-color: var(--main-color);
   }
 }
 </style>
