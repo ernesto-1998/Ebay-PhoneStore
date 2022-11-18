@@ -2,7 +2,7 @@
   <div class="sidecard-container">
     <div class="toggle-button">
       <!-- <ion-icon name="menu-outline" @click="sendEmit"></ion-icon> -->
-      <ion-icon name="chevron-forward-outline" @click="sendEmit"></ion-icon>
+      <!-- <ion-icon name="chevron-forward-outline" @click="sendEmit"></ion-icon> -->
       <div class="funel-icon" @click="sendEmit">
         <svg
           xmlns="http://www.w3.org/2000/svg"

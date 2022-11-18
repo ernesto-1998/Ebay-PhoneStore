@@ -397,7 +397,8 @@ const guardarAnuncio = async () => {
       });
       alertas.alertaAgregar();
       id_anuncio.value = docSnap.id;
-      guardarImagenes(docSnap.id);
+      await guardarImagenes(docSnap.id);
+      router.push({ name: "home" });
     } else {
       alertas.alertaNegativa(
         "Ha ocurrido un error",
@@ -446,7 +447,6 @@ const guardarImagenes = async (id) => {
     });
     numero++;
   }
-  router.push({ name: "home" });
 };
 
 // Este método sube la imagen a una carpeta temporal (Aun no la carpeta oficial)

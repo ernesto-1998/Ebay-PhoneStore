@@ -66,7 +66,7 @@
       </div>
     </div>
     <div v-if="!load" class="load-gif">
-      <q-spinner-hourglass v-if="!imgControl" color="purple" size="25rem" />
+      <q-spinner-hourglass color="purple" size="25rem" />
     </div>
     <Footer />
   </div>
@@ -393,9 +393,7 @@ const filtrarAnuncios = () => {
     0,
     anunciosPorPagina.value
   );
-  // anunciosFiltradosPaginados.value;
 };
-console.log(anunciosFiltradosPaginados.value);
 </script>
 
 <style scoped>
