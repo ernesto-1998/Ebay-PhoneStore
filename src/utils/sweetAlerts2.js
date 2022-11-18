@@ -10,6 +10,15 @@ export const alertas = {
             timer: 2000
           })
     },
+    alertaPositiva2(titulo, texto){
+        Swal.fire({
+            icon: 'success',
+            title: titulo,
+            text: texto,
+            showConfirmButton: false,
+            timer: 2500
+          })
+    },
     alertaPositiva(titulo, texto){
         Swal.fire({
             icon: "success",

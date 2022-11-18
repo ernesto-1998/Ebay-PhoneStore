@@ -3,7 +3,11 @@
     <div v-if="load" class="container-space anuncio-container">
       <div class="first-line">
         <CarouselView :array="imagenes" />
-        <AnuncioInfo :object="anuncio" />
+        <AnuncioInfo
+          :object="anuncio"
+          :anuncio1="anuncio.telefono.marca"
+          :anuncio2="anuncio.telefono.modelo"
+        />
       </div>
       <div class="anuncio-title">
         <span>Descripción</span>
@@ -19,7 +23,12 @@
           <router-link :to="{ name: 'home' }" class="button-item item1">
             <span>Inicio</span>
           </router-link>
-          <a class="button-item item2">
+          <a
+            class="button-item item2"
+            @click="
+              comprarPhone(anuncio.telefono.marca, anuncio.telefono.modelo)
+            "
+          >
             <span>Comprar</span>
           </a>
         </div>
@@ -33,13 +42,14 @@
 
 <script setup>
 import { ref, onBeforeMount } from "vue";
-import router from "../router/index";
+import router from "../router/index.js";
 import { ref as reference, listAll, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
 import { db, st } from "../firebase";
 import CarouselView from "../components/Anuncio/CarouselView.vue";
 import AnuncioInfo from "../components/Anuncio/AnuncioInfo.vue";
 import TelefonoDetalles from "../components/Anuncio/TelefonoDetalles.vue";
+import { alertas } from "src/utils/sweetAlerts2.js";
 
 const id_anuncio = router.currentRoute.value.params.id;
 let imagenes = ref([]);
@@ -62,6 +72,16 @@ let anuncio = ref({
     ram: null,
   },
 });
+
+const comprarPhone = (anuncio1, anuncio2) => {
+  alertas.alertaPositiva2(
+    "Felicidades!!!",
+    `Haz comprado el ${anuncio1} ${anuncio2}`
+  );
+  setTimeout(() => {
+    router.push({ name: "home" });
+  }, 2500);
+};
 
 onBeforeMount(async () => {
   const listRef = reference(st, "anuncios/" + id_anuncio);

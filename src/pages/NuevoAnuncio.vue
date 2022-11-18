@@ -403,28 +403,37 @@ const phoneNumberFormatter = () => {
 const guardarAnuncio = async () => {
   if (validarFormulario()) {
     if (imagenes.value.length > 0) {
-      const docSnap = await addDoc(collection(db, "anuncios"), {
-        // id_usuario: id_usuario,
-        titulo: anuncio.value.titulo.trim(),
-        nombre: anuncio.value.nombre.trim(),
-        telefonoContacto: anuncio.value.telefonoContacto,
-        fecha: new Date(),
-        precio: anuncio.value.precio,
-        descripcion: anuncio.value.descripcion.trim(),
-        telefono: {
-          estado: anuncio.value.telefono.estado.trim(),
-          marca: anuncio.value.telefono.marca.trim(),
-          modelo: anuncio.value.telefono.modelo.trim(),
-          pantalla: anuncio.value.telefono.pantalla,
-          sistema: anuncio.value.telefono.sistema,
-          rom: anuncio.value.telefono.rom,
-          ram: anuncio.value.telefono.ram,
-        },
-      });
-      alertas.alertaAgregar();
-      id_anuncio.value = docSnap.id;
-      await guardarImagenes(docSnap.id);
-      router.push({ name: "home" });
+      if (anuncio.value.telefonoContacto.length < 9) {
+        alertas.alertaNegativa(
+          "Ha ocurrido un error",
+          "Debes ingresar un número telefónico de 8 dígitos"
+        );
+      } else {
+        const docSnap = await addDoc(collection(db, "anuncios"), {
+          // id_usuario: id_usuario,
+          titulo: anuncio.value.titulo.trim(),
+          nombre: anuncio.value.nombre.trim(),
+          telefonoContacto: Number(
+            anuncio.value.telefonoContacto.replace("-", "")
+          ),
+          fecha: new Date(),
+          precio: anuncio.value.precio,
+          descripcion: anuncio.value.descripcion.trim(),
+          telefono: {
+            estado: anuncio.value.telefono.estado.trim(),
+            marca: anuncio.value.telefono.marca.trim(),
+            modelo: anuncio.value.telefono.modelo.trim(),
+            pantalla: anuncio.value.telefono.pantalla,
+            sistema: anuncio.value.telefono.sistema,
+            rom: anuncio.value.telefono.rom,
+            ram: anuncio.value.telefono.ram,
+          },
+        });
+        alertas.alertaAgregar();
+        id_anuncio.value = docSnap.id;
+        await guardarImagenes(docSnap.id);
+        router.push({ name: "home" });
+      }
     } else {
       alertas.alertaNegativa(
         "Ha ocurrido un error",

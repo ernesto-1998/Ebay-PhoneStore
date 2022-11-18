@@ -7,7 +7,12 @@
       <span> $ {{ object.precio }}</span>
     </div>
     <div class="info-button_comprar visibilidad">
-      <button class="btnA btnGeneralA">Comprar</button>
+      <button
+        class="btnA btnGeneralA"
+        @click="comprarPhone(props.anuncio1, props.anuncio2)"
+      >
+        Comprar
+      </button>
     </div>
     <div class="info-vendedor-telefono">
       <span>Vendedor: {{ object.nombre }}</span>
@@ -17,7 +22,23 @@
 </template>
 
 <script setup>
-const props = defineProps({ object: Object });
+import router from "../../router/index.js";
+import { alertas } from "../../utils/sweetAlerts2.js";
+const props = defineProps({
+  object: Object,
+  anuncio1: String,
+  anuncio2: String,
+});
+
+const comprarPhone = (anuncio1, anuncio2) => {
+  alertas.alertaPositiva2(
+    "Felicidades!!!",
+    `Haz comprado el ${anuncio1} ${anuncio2}`
+  );
+  setTimeout(() => {
+    router.push({ name: "home" });
+  }, 2500);
+};
 </script>
 
 <style scoped>
