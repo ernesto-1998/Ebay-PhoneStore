@@ -26,7 +26,7 @@
       </div>
     </div>
     <div v-if="!load" class="load-gif">
-      <img src="../assets/beer.gif" alt="" />
+      <q-spinner-hourglass color="purple" size="25rem" />
     </div>
   </div>
 </template>
@@ -127,6 +127,12 @@ onBeforeMount(async () => {
 .anuncio-textarea {
   padding: 1rem;
   border: 0.1rem solid #000;
+}
+
+.load-gif {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
