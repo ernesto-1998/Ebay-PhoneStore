@@ -120,9 +120,12 @@
               </div>
               <div class="item-input-number">
                 <input
+                  id="phone-number"
                   v-model="anuncio.telefonoContacto"
                   class="input-number"
-                  type="number"
+                  type="tel"
+                  maxlength="9"
+                  @keyup="phoneNumberFormatter()"
                 />
               </div>
             </div>
@@ -311,7 +314,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, onUpdated } from "vue";
 import router from "../router/index";
 import { doc, addDoc, collection } from "firebase/firestore";
 import { alertas } from "../utils/sweetAlerts2.js";
@@ -369,6 +372,29 @@ watch(conteo, () => {
     conteo.value = 1;
   }
 });
+
+// onUpdated(() => {
+//   console.log(Number(anuncio.value.telefonoContacto.replace("-", "")));
+// });
+
+const formatPhoneNumber = (value) => {
+  if (!value) return value;
+  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumberLength = phoneNumber.length;
+  if (phoneNumberLength < 4) return phoneNumber;
+  if (phoneNumberLength === 4) {
+    return `${phoneNumber.slice(0, 4)}-`;
+  }
+  if (phoneNumberLength > 4 && phoneNumberLength <= 8) {
+    return `${phoneNumber.slice(0, 4)}-${phoneNumber.slice(4)}`;
+  }
+};
+
+const phoneNumberFormatter = () => {
+  const inputField = document.getElementById("phone-number");
+  const formattedInputValue = formatPhoneNumber(inputField.value);
+  inputField.value = formattedInputValue;
+};
 
 // Métodos
 
