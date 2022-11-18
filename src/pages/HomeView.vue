@@ -66,7 +66,7 @@
       </div>
     </div>
     <div v-if="!load" class="load-gif">
-      <img src="../assets/beer.gif" alt="" />
+      <q-spinner-hourglass v-if="!imgControl" color="purple" size="25rem" />
     </div>
     <Footer />
   </div>
@@ -89,7 +89,7 @@ let anuncios = ref([]);
 let isActive = ref(false);
 let anunciosFiltrados = ref([]);
 let anunciosFiltradosPaginados = ref([]);
-let anunciosPorPagina = ref(4);
+let anunciosPorPagina = ref(8);
 let anunciosPorPaginaOptions = ref([4, 8, 16]);
 let current = ref(1);
 let cantidades = ref({});
@@ -497,6 +497,8 @@ console.log(anunciosFiltradosPaginados.value);
 
 .load-gif {
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

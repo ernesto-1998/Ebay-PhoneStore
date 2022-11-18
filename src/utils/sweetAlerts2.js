@@ -2,13 +2,21 @@ import { QMarkupTable } from 'quasar'
 import Swal from 'sweetalert2'
 
 export const alertas = {
-    alertaPositiva(texto){
+    alertaAgregar(){
+        Swal.fire({
+            icon: 'success',
+            title: 'El Anuncio se ha guardado con éxito!!!',
+            showConfirmButton: false,
+            timer: 2000
+          })
+    },
+    alertaPositiva(titulo, texto){
         Swal.fire({
             icon: "success",
             title: titulo,
             text: texto,
             color: '#fff',
-            background: '#0B032D',
+            background: '#9C2C77',
             backdrop: `
                 rgba(0,0,123,0.4)
                 left top
@@ -22,7 +30,7 @@ export const alertas = {
             title: titulo,
             text: texto,
             color: '#fff',
-            background: '#0B032D',
+            background: '#CD104D',
             backdrop: `
                 rgba(0,0,123,0.4)
                 left top

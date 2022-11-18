@@ -314,6 +314,7 @@
 import { ref, onMounted, watch } from "vue";
 import router from "../router/index";
 import { doc, addDoc, collection } from "firebase/firestore";
+import { alertas } from "../utils/sweetAlerts2.js";
 import { db, st } from "../firebase";
 import {
   uploadBytes,
@@ -380,27 +381,35 @@ const guardarAnuncio = async () => {
         // id_usuario: id_usuario,
         titulo: anuncio.value.titulo.trim(),
         nombre: anuncio.value.nombre.trim(),
-        telefonoContacto: anuncio.value.telefonoContacto.trim(),
+        telefonoContacto: anuncio.value.telefonoContacto,
         fecha: new Date(),
-        precio: anuncio.value.precio.trim(),
+        precio: anuncio.value.precio,
         descripcion: anuncio.value.descripcion.trim(),
         telefono: {
           estado: anuncio.value.telefono.estado.trim(),
           marca: anuncio.value.telefono.marca.trim(),
           modelo: anuncio.value.telefono.modelo.trim(),
-          pantalla: anuncio.value.telefono.pantalla.trim(),
-          sistema: anuncio.value.telefono.sistema.trim(),
-          rom: anuncio.value.telefono.rom.trim(),
-          ram: anuncio.value.telefono.ram.trim(),
+          pantalla: anuncio.value.telefono.pantalla,
+          sistema: anuncio.value.telefono.sistema,
+          rom: anuncio.value.telefono.rom,
+          ram: anuncio.value.telefono.ram,
         },
       });
+      alertas.alertaAgregar();
       id_anuncio.value = docSnap.id;
       guardarImagenes(docSnap.id);
     } else {
-      alert("Debes subir por lo menos una imagen para crear un anuncio");
+      alertas.alertaNegativa(
+        "Ha ocurrido un error",
+        "Debes subir al menos una imagen para crear un anuncio"
+      );
     }
   } else {
-    alert("Debes llenar todos los campos");
+    alertas.alertaNegativa(
+      "Ha ocurrido un error",
+      "Debes llenar todos los campos de los formularios"
+    );
+    // router.push({ name: "home" });
   }
 };
 
@@ -433,11 +442,11 @@ const guardarImagenes = async (id) => {
       reference(st, "anuncios/" + id + "/" + numero),
       image
     ).then((snapshot) => {
-      console.log("Imagenes guardadas");
+      // console.log("Imagenes guardadas");
     });
     numero++;
   }
-  router.go();
+  router.push({ name: "home" });
 };
 
 // Este método sube la imagen a una carpeta temporal (Aun no la carpeta oficial)
@@ -459,10 +468,16 @@ const cargarImagen = async () => {
         mostrarMovil.value = true;
       });
     } else {
-      alert("Solamente puede subir 4 imagenes como máximo");
+      alertas.alertaNegativa(
+        "Ha ocurrido un error",
+        "Solamente puedes subir un máximo de 4 imagenes por anuncio"
+      );
     }
   } else {
-    alert("Debe seleccionar al menos una imagen");
+    alertas.alertaNegativa(
+      "Ha ocurrido un error",
+      "Debes seleccionar una imagen para subirla"
+    );
   }
 };
 
@@ -488,14 +503,6 @@ const traerImagenTemp = async () => {
       }
     }
   );
-
-  //   metaDatosI.value.push({
-  //     size: (metaDatos.size * 0.001).toFixed(0),
-  //     type: metaDatos.contentType,
-  //   });
-  //   conteo.value += 1;
-  //   contador.value = imagenes.value.length - 1;
-  //   this.contador3 += 1;
 };
 
 // Método para cambiar imagen en el menú
@@ -524,7 +531,10 @@ const borrarImagen = (numero, index) => {
     borrarKeys.value.numero = null;
     borrarKeys.value.index = null;
   } else {
-    alert("Debes seleccionar una imagen para eliminarla");
+    alertas.alertaNegativa(
+      "Ha ocurrido un error",
+      "Debes seleccionar una imagen para eliminarla"
+    );
   }
 };
 </script>
